@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from enum import StrEnum
 from uuid import uuid4
 
@@ -24,7 +24,7 @@ class Task:
     due_date: date | None = None
     status: Status = Status.PENDING
     id: str = field(default_factory=lambda: str(uuid4()))
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     def __post_init__(self) -> None:
         self.title = self.title.strip()
