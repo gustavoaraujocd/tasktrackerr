@@ -40,7 +40,21 @@ tasktrackerr/
 
 **Fase 1 — Planejamento Lógico e Estruturação do Projeto**
 
-Nesta etapa ainda não há implementação funcional em Python. O repositório registra a arquitetura planejada e servirá como base para a próxima fase.
+A entrega inicial foi concluída com documentação, estrutura Git/GitHub e apresentação em vídeo. A implementação funcional em Python fica reservada para a próxima fase do Bootcamp.
+
+## Apresentação em vídeo
+
+- **YouTube:** https://youtu.be/vuKSPL0uC0U?feature=shared
+
+## Status da entrega
+
+- [x] Planejamento lógico concluído
+- [x] Regras e entradas/saídas documentadas
+- [x] Algoritmo em português definido
+- [x] Estrutura do repositório criada
+- [x] Branch `develop` preparada
+- [x] Vídeo de apresentação publicado
+- [x] Etapa Inicial pronta para envio no AVA
 
 ## Próximas etapas
 
