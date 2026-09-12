@@ -5,13 +5,20 @@ Projeto acadêmico do **Bootcamp II — Entrega 1: Ambiente, Especificação Té
 ## Visão geral
 O TaskTracker é um sistema para organização e acompanhamento de tarefas pessoais, acadêmicas e profissionais. Nesta entrega, o projeto foi evoluído do planejamento inicial para um núcleo funcional em Python, guiado por especificação (SDD), com ambiente reproduzível e suíte automatizada de testes.
 
-## Aluno
-- **Nome:** Gustavo Carmo
+## Equipe
+
+| Integrante | RA |
+|---|---:|
+| Jonathan Rodrigues Silva Corrêa | 22450356 |
+| Matheus Couto Nogueira | 22505474 |
+| Esther Diniz Bastos | 22505492 |
+| Cauã Gonçalves Xavier Mrad | 22452326 |
+| Rillary Lorranne de Souza Portilho | 22450936 |
+| Gustavo Araújo do Carmo | 22304113 |
+
 - **Curso:** Análise e Desenvolvimento de Sistemas (ADS)
 - **Unidade/Turma:** Taguatinga — Noturno
-- **E-mail institucional:** GUSTAVO.CARMO@SEMPRECEUB.COM
-
-> Caso a equipe possua outros integrantes, adicionar aqui os nomes completos e RAs antes da submissão no Moodle.
+- **E-mail institucional de referência:** GUSTAVO.CARMO@SEMPRECEUB.COM
 
 ## Objetivo funcional
 Permitir cadastrar, consultar, atualizar, listar e concluir tarefas, controlando prioridade, prazo e status com regras de validação explícitas.
@@ -32,6 +39,8 @@ O fluxo adotado é:
 
 Não devem ser feitos commits diretos na `main`. O escopo da sprint foi decomposto em Issues independentes no GitHub para especificação, harness/testes e ambiente/IA.
 
+Todo merge relevante deve ocorrer por Pull Request. O PR da Entrega 1 precisa ser revisado por outro integrante da equipe antes do merge em `develop`, mantendo evidência de comentário/revisão e aprovação no próprio GitHub.
+
 ## Fluxo SDD
 1. Especificar o comportamento esperado.
 2. Decompor em componentes e contratos.
@@ -41,8 +50,38 @@ Não devem ser feitos commits diretos na `main`. O escopo da sprint foi decompos
 6. Refinar especificação quando necessário.
 7. Integrar via Pull Request.
 
-## Agente de IA
-O projeto está preparado para uso de **Codex/ChatGPT** como agente de apoio à geração e revisão de código. O arquivo `AGENTS.md` define o contexto persistente, as regras e o fluxo esperado para evitar alterações que contradigam a especificação.
+## Ferramenta de IA utilizada
+
+**Ferramenta utilizada:** Codex, com apoio do ChatGPT para organização técnica, documentação e revisão do fluxo.
+
+### Como a IA foi utilizada
+A IA foi usada como agente de apoio ao desenvolvimento, sem substituir a especificação. O fluxo adotado foi orientado por SDD: primeiro foram definidos requisitos, regras de negócio, contratos e critérios de aceite; somente depois o agente foi utilizado para apoiar a geração, revisão e refinamento dos artefatos de código e documentação.
+
+### Tarefas em que a IA foi utilizada
+- organização da estrutura inicial do repositório;
+- apoio à decomposição do problema em componentes testáveis;
+- geração assistida do modelo de domínio e do serviço de tarefas;
+- criação e refinamento da suíte inicial de testes com `pytest`;
+- apoio na criação do `Dockerfile` e `docker-compose.yml`;
+- revisão de documentação técnica, ADRs e README;
+- análise dos resultados do harness e refinamento após feedback dos testes;
+- apoio à preparação de Issues, branches e Pull Request seguindo a governança definida.
+
+### Como a especificação controlou a geração
+A geração de código não foi feita de forma livre. O documento `docs/especificacao-sdd.md` define os requisitos funcionais e não funcionais, regras de negócio, entradas, saídas e critérios de aceite. O arquivo `AGENTS.md` fornece ao agente o contexto persistente e estabelece que qualquer código gerado deve respeitar essa especificação.
+
+Assim, o agente deve:
+1. consultar a especificação antes de propor alterações;
+2. não criar comportamentos que não estejam previstos nos requisitos;
+3. manter as regras de negócio definidas no domínio;
+4. criar ou atualizar testes quando houver alteração de comportamento;
+5. usar o resultado dos testes como feedback para refinamento;
+6. registrar decisões arquiteturais relevantes nos ADRs.
+
+Esse processo caracteriza o uso de IA dentro do fluxo **Spec-Driven Development**, em que a especificação é a fonte de verdade e o agente atua como mecanismo de implementação e revisão controlada.
+
+### Evidência para a entrega
+O PDF final da Entrega 1 deve incluir um print mostrando o uso do Codex/ChatGPT no desenvolvimento, preferencialmente evidenciando uma interação relacionada à geração/revisão de código, testes ou documentação, junto com a referência ao `AGENTS.md` e à especificação SDD.
 
 ## Requisitos
 - Python 3.11+
@@ -138,13 +177,15 @@ tasktrackerr/
 - [x] README com instalação, execução e ADRs.
 - [x] Especificação técnica SDD.
 - [x] Contratos e regras de negócio.
+- [x] Ferramenta de IA identificada e uso documentado.
 - [x] Arquivo de contexto para agente de IA.
 - [x] Dockerfile e Docker Compose.
 - [x] Harness automatizado com pytest.
 - [x] Casos principais e edge cases.
 - [x] Logs de execução documentados.
-- [ ] Aprovação de outro integrante no Pull Request, quando aplicável.
-- [ ] Adicionar nomes completos e RAs dos demais integrantes, se houver.
+- [x] Integrantes e RAs registrados.
+- [ ] Aprovação de outro integrante no Pull Request #4.
+- [ ] Inserir print de evidência do uso do Codex/ChatGPT no PDF final.
 
 ## Apresentação em vídeo
 https://youtu.be/vuKSPL0uC0U?feature=shared
