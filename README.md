@@ -80,8 +80,8 @@ Assim, o agente deve:
 
 Esse processo caracteriza o uso de IA dentro do fluxo **Spec-Driven Development**, em que a especificação é a fonte de verdade e o agente atua como mecanismo de implementação e revisão controlada.
 
-### Evidência para a entrega
-O PDF final da Entrega 1 deve incluir um print mostrando o uso do Codex/ChatGPT no desenvolvimento, preferencialmente evidenciando uma interação relacionada à geração/revisão de código, testes ou documentação, junto com a referência ao `AGENTS.md` e à especificação SDD.
+### Evidência para o PDF
+O PDF final deve conter pelo menos um print real do uso do Codex/ChatGPT durante o desenvolvimento. A captura recomendada deve mostrar uma interação relacionada à geração ou revisão de código, testes ou documentação. O PDF deve explicar que a interação foi orientada pelos arquivos `docs/especificacao-sdd.md` e `AGENTS.md`.
 
 ## Requisitos
 - Python 3.11+
@@ -184,8 +184,9 @@ tasktrackerr/
 - [x] Casos principais e edge cases.
 - [x] Logs de execução documentados.
 - [x] Integrantes e RAs registrados.
-- [ ] Aprovação de outro integrante no Pull Request #4.
-- [ ] Inserir print de evidência do uso do Codex/ChatGPT no PDF final.
+- [ ] Aprovação real de outro integrante no Pull Request #4.
+- [ ] Inserir no PDF final um print real do uso do Codex/ChatGPT.
+- [ ] Inserir no PDF final um print/log do harness/pipeline executando com sucesso.
 
 ## Apresentação em vídeo
 https://youtu.be/vuKSPL0uC0U?feature=shared
