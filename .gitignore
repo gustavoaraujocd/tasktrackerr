@@ -6,6 +6,12 @@ __pycache__/
 .venv/
 venv/
 env/
+*.egg-info/
+
+# React Native / Expo
+node_modules/
+dist/
+.expo/
 
 # IDEs e editores
 .vscode/
