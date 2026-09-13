@@ -27,6 +27,8 @@ Permitir cadastrar, consultar, atualizar, listar e concluir tarefas, controlando
 - `src/tasktracker/models.py`: entidades, enums e validações do domínio.
 - `src/tasktracker/service.py`: casos de uso e armazenamento em memória.
 - `tests/test_service.py`: harness de testes automatizados.
+- `mobile/App.js`: aplicação React Native com as telas Inspirações e Planejador.
+- `mobile/tests/validate-delivery.js`: validação automatizada dos requisitos da atividade mobile.
 - `docs/especificacao-sdd.md`: especificação técnica e contratos.
 - `docs/adrs.md`: decisões arquiteturais.
 - `AGENTS.md`: regras de contexto para agentes de IA no fluxo SDD.
@@ -109,6 +111,19 @@ pytest -q
 ```bash
 docker compose build
 docker compose run --rm tests
+```
+
+### Aplicação mobile
+```bash
+cd mobile
+npm install
+npm start
+```
+
+Para validar automaticamente imagens, controles, telas e palavras:
+```bash
+cd mobile
+npm test
 ```
 
 ## Suíte inicial
