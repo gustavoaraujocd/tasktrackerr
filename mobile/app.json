@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "TaskTracker Mobile",
+    "slug": "tasktracker-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-asset"
+    ]
+  }
+}
