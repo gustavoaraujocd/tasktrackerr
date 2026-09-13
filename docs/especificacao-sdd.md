@@ -68,3 +68,18 @@ A Entrega 1 é aceita quando a suíte cobre fluxo principal e casos de borda, to
 
 ## 9. Refinamentos por feedback
 A especificação inicial previa apenas planejamento. Para atender à Entrega 1, foi refinada para incluir núcleo executável, contratos explícitos, validação de entradas, filtro por status, Docker e harness automatizado. A persistência foi mantida em memória nesta sprint para preservar isolamento e testabilidade.
+
+## 10. Extensão mobile — listas e formulários
+
+### Requisitos funcionais
+- RFM01 apresentar uma lista temática com pelo menos cinco informações e seis imagens.
+- RFM02 permitir interação com os itens e exibir cinco descrições com, no mínimo, trinta palavras cada.
+- RFM03 disponibilizar uma segunda tela com quatro entradas de texto, dois seletores, dois controles deslizantes, dois interruptores e dois botões interativos.
+- RFM04 permitir alternar entre as duas telas sem perder os dados preenchidos durante a sessão.
+
+### Critérios de aceite
+- O ponto de entrada da aplicação é `mobile/App.js`.
+- A tela “Inspirações” contém seis imagens e cinco itens interativos.
+- As cinco descrições detalhadas totalizam pelo menos 150 palavras.
+- A tela “Planejador” contém os grupos mínimos de controles pedidos e apresenta retorno visual após cada botão.
+- A interface funciona em Android, iOS e Web por meio do Expo.
