@@ -1,7 +1,7 @@
 """Interface de linha de comando do TaskTracker.
 
 Fase 2 — Bootcamp II: aplicação das regras de negócio em Python,
-com menu contínuo para cadastro e visualização de tarefas.
+com menu contínuo para cadastro, visualização e alerta de tarefas atrasadas.
 """
 
 from datetime import datetime
@@ -48,11 +48,36 @@ def read_due_date():
             print("[ERRO] Data inválida. Use o formato DD/MM/AAAA.")
 
 
+def read_due_time():
+    """Solicita um horário no formato HH:MM ou permite deixar em branco."""
+    while True:
+        value = input("Hora limite (HH:MM, opcional): ").strip()
+        if not value:
+            return None
+        try:
+            return datetime.strptime(value, "%H:%M").time()
+        except ValueError:
+            print("[ERRO] Horário inválido. Use o formato HH:MM.")
+
+
 def format_due_date(task) -> str:
-    """Formata a data para apresentação no terminal."""
+    """Formata a data e o horário para apresentação no terminal."""
     if task.due_date is None:
         return "Não informada"
-    return task.due_date.strftime("%d/%m/%Y")
+    if task.due_time is None:
+        return task.due_date.strftime("%d/%m/%Y")
+    return f"{task.due_date.strftime('%d/%m/%Y')} às {task.due_time.strftime('%H:%M')}"
+
+
+def show_overdue_notifications(service: TaskService) -> None:
+    """Exibe alerta para tarefas pendentes que ultrapassaram o prazo."""
+    overdue_tasks = service.overdue()
+    if not overdue_tasks:
+        return
+
+    print("\n[ALERTA] Você possui tarefas fora do prazo:")
+    for task in overdue_tasks:
+        print(f"- {task.title} (ID: {task.id})")
 
 
 def create_task(service: TaskService) -> None:
@@ -62,12 +87,14 @@ def create_task(service: TaskService) -> None:
     description = input("Descrição: ").strip()
     priority = read_priority()
     due_date = read_due_date()
+    due_time = read_due_time()
 
     task = service.create(
         title=title,
         description=description,
         priority=priority,
         due_date=due_date,
+        due_time=due_time,
     )
 
     print("\n[SUCESSO] Tarefa cadastrada com sucesso!")
@@ -90,8 +117,10 @@ def list_tasks(service: TaskService) -> None:
         print(f"Título:      {task.title}")
         print(f"Descrição:   {task.description or 'Não informada'}")
         print(f"Prioridade:  {task.priority.value.capitalize()}")
-        print(f"Data limite: {format_due_date(task)}")
+        print(f"Prazo:       {format_due_date(task)}")
         print(f"Status:      {task.status.value.replace('_', ' ').capitalize()}")
+
+    show_overdue_notifications(service)
 
 
 def show_menu() -> None:
@@ -113,6 +142,7 @@ def main() -> None:
 
     while True:
         show_menu()
+        show_overdue_notifications(service)
         option = input("Escolha uma opção: ").strip()
 
         if option == "1":
