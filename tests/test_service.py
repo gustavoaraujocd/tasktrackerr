@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime, time
 
 import pytest
 
@@ -28,6 +28,11 @@ def test_invalid_due_date_is_rejected():
         TaskService().create("Teste", due_date="2026-09-12")
 
 
+def test_invalid_due_time_is_rejected():
+    with pytest.raises(ValueError):
+        TaskService().create("Teste", due_time="18:00")
+
+
 def test_complete_task():
     service = TaskService()
     task = service.create("Entregar trabalho")
@@ -50,6 +55,31 @@ def test_filter_by_status():
     service.complete(first.id)
     assert [task.title for task in service.list(Status.DONE)] == ["A"]
     assert [task.title for task in service.list(Status.PENDING)] == ["B"]
+
+
+def test_overdue_task_is_identified():
+    service = TaskService()
+    task = service.create(
+        "Prazo vencido",
+        due_date=date(2026, 9, 30),
+        due_time=time(18, 0),
+    )
+
+    overdue = service.overdue(datetime(2026, 10, 1, 10, 0))
+
+    assert [item.id for item in overdue] == [task.id]
+
+
+def test_completed_task_is_not_overdue():
+    service = TaskService()
+    task = service.create(
+        "Concluida",
+        due_date=date(2026, 9, 30),
+        due_time=time(18, 0),
+    )
+    service.complete(task.id)
+
+    assert service.overdue(datetime(2026, 10, 1, 10, 0)) == []
 
 
 def test_missing_task_raises_key_error():
