@@ -5,12 +5,16 @@ from uuid import uuid4
 
 
 class Priority(StrEnum):
+    """Níveis de prioridade disponíveis para uma tarefa."""
+
     LOW = "baixa"
     MEDIUM = "media"
     HIGH = "alta"
 
 
 class Status(StrEnum):
+    """Estados possíveis de uma tarefa."""
+
     PENDING = "pendente"
     IN_PROGRESS = "em_andamento"
     DONE = "concluida"
@@ -18,6 +22,8 @@ class Status(StrEnum):
 
 @dataclass(slots=True)
 class Task:
+    """Representa uma tarefa e aplica as validações do domínio."""
+
     title: str
     description: str = ""
     priority: Priority = Priority.MEDIUM
@@ -28,11 +34,16 @@ class Task:
 
     def __post_init__(self) -> None:
         self.title = self.title.strip()
+        self.description = self.description.strip()
+
         if not self.title:
-            raise ValueError("title is required")
+            raise ValueError("O título da tarefa é obrigatório.")
+
         if not isinstance(self.priority, Priority):
-            raise ValueError("invalid priority")
+            raise ValueError("Prioridade inválida.")
+
         if not isinstance(self.status, Status):
-            raise ValueError("invalid status")
+            raise ValueError("Status inválido.")
+
         if self.due_date is not None and not isinstance(self.due_date, date):
-            raise ValueError("due_date must be a date")
+            raise ValueError("A data limite deve ser uma data válida.")
