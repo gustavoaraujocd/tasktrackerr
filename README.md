@@ -1,11 +1,203 @@
 # TaskTracker
 
-Projeto acadêmico do **Bootcamp II — Entrega 1: Ambiente, Especificação Técnica e Test Harness**.
+Aplicação acadêmica desenvolvida no **Bootcamp II — Fase 2 (Entrega Intermediária)**, com foco em Engenharia de Software, versionamento profissional com Git/GitHub e implementação das regras de negócio em Python.
 
-## Visão geral
-O TaskTracker é um sistema para organização e acompanhamento de tarefas pessoais, acadêmicas e profissionais. Nesta entrega, o projeto foi evoluído do planejamento inicial para um núcleo funcional em Python, guiado por especificação (SDD), com ambiente reproduzível e suíte automatizada de testes.
+## 1. Visão geral
 
-## Equipe
+O **TaskTracker** é uma aplicação para organização e acompanhamento de tarefas pessoais, acadêmicas e profissionais. O projeto transforma o planejamento desenvolvido na Fase 1 em uma solução funcional, executada por linha de comando (CLI), com validações explícitas, código modular e testes automatizados.
+
+### Objetivos da Fase 2
+
+- Estruturar e versionar o projeto com Git e GitHub;
+- Implementar a lógica de negócio em Python 3.11+;
+- Validar entradas conforme as regras definidas na especificação;
+- Permitir cadastro e visualização de tarefas pelo terminal;
+- Manter rastreabilidade por meio de commits;
+- Preparar a base técnica para a Fase 3, com testes e containerização.
+
+## 2. Funcionalidades
+
+A interface CLI disponibiliza um menu contínuo com:
+
+1. **Cadastrar nova tarefa**
+2. **Visualizar tarefas cadastradas**
+3. **Sair da aplicação**
+
+Cada tarefa possui:
+
+- **Título:** obrigatório e não pode conter apenas espaços;
+- **Descrição:** campo livre e opcional;
+- **Prioridade:** Alta, Média/Media ou Baixa;
+- **Data limite:** opcional, com entrada no formato DD/MM/AAAA;
+- **Status:** iniciado automaticamente como Pendente.
+
+Entradas inválidas são rejeitadas com mensagens orientativas e nova solicitação de dados.
+
+## 3. Arquitetura
+
+```text
+TaskTracker/
+├── .github/
+├── docs/
+│   ├── adrs.md
+│   └── especificacao-sdd.md
+├── src/
+│   ├── main.py
+│   └── tasktracker/
+│       ├── __init__.py
+│       ├── models.py
+│       └── service.py
+├── tests/
+│   └── test_service.py
+├── AGENTS.md
+├── Dockerfile
+├── docker-compose.yml
+├── pyproject.toml
+└── README.md
+```
+
+### Responsabilidades
+
+- `src/main.py`: interface de linha de comando, menu, entrada de dados e apresentação das tarefas.
+- `src/tasktracker/models.py`: entidades, enums e validações do domínio.
+- `src/tasktracker/service.py`: casos de uso e armazenamento em memória.
+- `tests/test_service.py`: testes automatizados das regras e casos de uso.
+- `docs/especificacao-sdd.md`: requisitos, regras de negócio, contratos e critérios de aceite.
+- `docs/adrs.md`: decisões arquiteturais do projeto.
+- `AGENTS.md`: contexto e regras para apoio de agentes de IA.
+
+## 4. Regras de negócio
+
+As principais regras implementadas são:
+
+- O título é obrigatório;
+- A prioridade aceita somente `baixa`, `media` ou `alta`;
+- O status utiliza os estados `pendente`, `em_andamento` e `concluida`;
+- O prazo, quando utilizado pelo núcleo de domínio, deve ser uma data válida;
+- Cada tarefa recebe um identificador único;
+- O identificador permanece o mesmo durante atualizações;
+- Consultas de tarefas inexistentes geram erro explícito.
+
+A especificação técnica em `docs/especificacao-sdd.md` é a fonte de verdade dos contratos e critérios de aceite.
+
+## 5. Tecnologias
+
+- **Python 3.11+**
+- **Pytest**
+- **Git/GitHub**
+- **Docker e Docker Compose**
+- **SDD (Spec-Driven Development)**
+
+## 6. Instalação
+
+### Pré-requisitos
+
+- Python 3.11 ou superior;
+- pip;
+- Git;
+- Docker e Docker Compose (opcional para execução via container).
+
+### Ambiente virtual
+
+```bash
+python -m venv .venv
+```
+
+Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+Linux/macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+Instale as dependências de desenvolvimento:
+
+```bash
+pip install -e ".[dev]"
+```
+
+## 7. Execução da aplicação
+
+Na raiz do projeto:
+
+```bash
+python src/main.py
+```
+
+Exemplo de fluxo:
+
+```text
+==================================================
+              TASKTRACKER
+==================================================
+1. Cadastrar nova tarefa
+2. Visualizar tarefas cadastradas
+3. Sair da aplicação
+==================================================
+Escolha uma opção:
+```
+
+## 8. Testes automatizados
+
+Execute a suíte com:
+
+```bash
+pytest -q
+```
+
+Execução com Docker:
+
+```bash
+docker compose build
+docker compose run --rm tests
+```
+
+A suíte cobre criação, validação de título, prioridade, prazo, conclusão, atualização, filtro por status e consulta de tarefa inexistente.
+
+## 9. Fluxo de desenvolvimento
+
+O projeto utiliza um fluxo baseado em branches e Pull Requests:
+
+```text
+feature/*
+    ↓
+Pull Request
+    ↓
+develop
+    ↓
+Pull Request
+    ↓
+main
+```
+
+A evolução do projeto deve ser registrada em commits pequenos e descritivos, permitindo acompanhar a implementação da estrutura, do menu e das regras de validação.
+
+## 10. SDD e uso de IA
+
+O desenvolvimento utiliza **Spec-Driven Development (SDD)**. O comportamento esperado é definido antes da implementação e utilizado como referência para desenvolvimento, testes e revisão.
+
+A ferramenta de IA utilizada no projeto foi o **Codex**, com apoio do ChatGPT para organização técnica, documentação e revisão. A IA foi utilizada como ferramenta de apoio, enquanto requisitos, regras de negócio e critérios de aceite permanecem definidos pela equipe.
+
+## 11. Evolução do projeto
+
+### Fase 1 — Planejamento
+
+Planejamento lógico, arquitetura de dados, decomposição do problema, algoritmo em português e mapeamento para Git/GitHub.
+
+### Fase 2 — Entrega intermediária
+
+Estruturação do repositório, versionamento, implementação da aplicação CLI em Python e validação das regras de negócio.
+
+### Fase 3 — Entrega final
+
+Evolução prevista para empacotamento, containerização com Docker, testes e deploy.
+
+## 12. Equipe
 
 | Integrante | RA |
 |---|---:|
@@ -16,117 +208,12 @@ O TaskTracker é um sistema para organização e acompanhamento de tarefas pesso
 | Rillary Lorranne de Souza Portilho | 22450936 |
 | Gustavo Araújo do Carmo | 22304113 |
 
-- **Curso:** Análise e Desenvolvimento de Sistemas (ADS)
-- **Unidade/Turma:** Taguatinga — Noturno
-- **E-mail institucional de referência:** GUSTAVO.CARMO@SEMPRECEUB.COM
+**Curso:** Análise e Desenvolvimento de Sistemas (ADS)  
+**Unidade/Turma:** Taguatinga — Noturno
 
-## Objetivo funcional
-Permitir cadastrar, consultar, atualizar, listar e concluir tarefas, controlando prioridade, prazo e status com regras de validação explícitas.
+## 13. Próximos passos
 
-## Arquitetura
-- `src/tasktracker/models.py`: entidades, enums e validações do domínio.
-- `src/tasktracker/service.py`: casos de uso e armazenamento em memória.
-- `tests/test_service.py`: harness de testes automatizados.
-- `docs/especificacao-sdd.md`: especificação técnica e contratos.
-- `docs/adrs.md`: decisões arquiteturais.
-- `AGENTS.md`: regras de contexto para agentes de IA no fluxo SDD.
-- `Dockerfile` e `docker-compose.yml`: ambiente reproduzível.
-
-## Fluxo Git e governança
-`feature/*` -> Pull Request -> `develop` -> Pull Request -> `main`
-
-Não devem ser feitos commits diretos na `main`. O escopo da sprint foi decomposto em Issues independentes no GitHub para especificação, harness/testes e ambiente/IA. O PR #4 foi revisado e aprovado por dois integrantes antes do merge em `develop`.
-
-## Fluxo SDD
-1. Especificar o comportamento esperado.
-2. Decompor em componentes e contratos.
-3. Implementar uma unidade pequena.
-4. Executar o harness automatizado.
-5. Revisar resultado e código.
-6. Refinar especificação quando necessário.
-7. Integrar via Pull Request.
-
-## Ferramenta de IA utilizada
-**Ferramenta utilizada:** Codex, com apoio do ChatGPT para organização técnica, documentação e revisão do fluxo.
-
-### Como a IA foi utilizada
-A IA foi usada como agente de apoio ao desenvolvimento, sem substituir a especificação. Primeiro foram definidos requisitos, regras de negócio, contratos e critérios de aceite; depois o agente foi utilizado para apoiar geração, revisão e refinamento dos artefatos.
-
-### Tarefas em que a IA foi utilizada
-- organização da estrutura inicial do repositório;
-- decomposição do problema em componentes testáveis;
-- geração assistida do modelo de domínio e serviço de tarefas;
-- criação e refinamento da suíte de testes com `pytest`;
-- apoio na criação do `Dockerfile` e `docker-compose.yml`;
-- revisão de ADRs e documentação técnica;
-- análise dos resultados do harness e refinamento após feedback dos testes;
-- apoio à preparação de Issues, branches e Pull Requests.
-
-### Como a especificação controlou a geração
-O documento `docs/especificacao-sdd.md` define requisitos, regras de negócio, entradas, saídas e critérios de aceite. O arquivo `AGENTS.md` estabelece que qualquer código gerado deve respeitar essa especificação. A especificação funciona como fonte de verdade do fluxo SDD.
-
-## Requisitos
-- Python 3.11+
-- pip
-- Docker + Docker Compose
-
-## Instalação local
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .[dev]
-```
-
-## Executar o test harness
-### Local
-```bash
-pytest -q
-```
-
-### Docker
-```bash
-docker compose build
-docker compose run --rm tests
-```
-
-## Suíte inicial
-A suíte cobre criação, validações de título/prioridade/prazo, conclusão, atualização, filtro por status e consulta inexistente.
-
-## Evidência de execução
-```text
-........                                                                 [100%]
-8 passed in 0.06s
-```
-
-Durante a primeira execução foi identificado um aviso de depreciação em `datetime.utcnow()`. O código foi refinado para usar `datetime.now(UTC)`.
-
-## Decisões arquiteturais resumidas
-- Python 3.11.
-- Domínio separado dos casos de uso.
-- Persistência em memória nesta entrega.
-- Pytest como harness.
-- Docker para reprodutibilidade.
-- Git Flow simplificado com `main`, `develop` e `feature/*`.
-
-## Especificação técnica
-A especificação completa está em `docs/especificacao-sdd.md`.
-
-## Checklist da Entrega 1
-- [x] Repositório público no GitHub.
-- [x] Branches `main` e `develop`.
-- [x] Trabalho executado em `feature/*`.
-- [x] Issues com decomposição da sprint.
-- [x] README com instalação, execução e ADRs.
-- [x] Especificação técnica SDD.
-- [x] Contratos e regras de negócio.
-- [x] Ferramenta de IA identificada e uso documentado.
-- [x] Arquivo de contexto para agente de IA.
-- [x] Dockerfile e Docker Compose.
-- [x] Harness automatizado com pytest.
-- [x] Casos principais e edge cases.
-- [x] Logs de execução documentados.
-- [x] Integrantes e RAs registrados.
-- [x] Aprovação de integrantes no PR #4.
-
-## Apresentação em vídeo
-https://youtu.be/vuKSPL0uC0U?feature=shared
+- Refinar os testes da interface CLI;
+- Evoluir os casos de uso conforme os critérios da próxima etapa;
+- Consolidar a execução em Docker;
+- Preparar a apresentação técnica e a demonstração da solução.
