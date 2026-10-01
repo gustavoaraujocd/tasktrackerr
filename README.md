@@ -6,15 +6,6 @@ Aplicação acadêmica desenvolvida no **Bootcamp II — Fase 2 (Entrega Interme
 
 O **TaskTracker** é uma aplicação para organização e acompanhamento de tarefas pessoais, acadêmicas e profissionais. O projeto transforma o planejamento desenvolvido na Fase 1 em uma solução funcional, executada por linha de comando (CLI), com validações explícitas, código modular e testes automatizados.
 
-### Objetivos da Fase 2
-
-- Estruturar e versionar o projeto com Git e GitHub;
-- Implementar a lógica de negócio em Python 3.11+;
-- Validar entradas conforme as regras definidas na especificação;
-- Permitir cadastro e visualização de tarefas pelo terminal;
-- Manter rastreabilidade por meio de commits;
-- Preparar a base técnica para a Fase 3, com testes e containerização.
-
 ## 2. Funcionalidades
 
 A interface CLI disponibiliza um menu contínuo com:
@@ -29,7 +20,11 @@ Cada tarefa possui:
 - **Descrição:** campo livre e opcional;
 - **Prioridade:** Alta, Média/Media ou Baixa;
 - **Data limite:** opcional, com entrada no formato DD/MM/AAAA;
-- **Status:** iniciado automaticamente como Pendente.
+- **Hora limite:** opcional, com entrada no formato HH:MM;
+- **Status:** iniciado automaticamente como Pendente;
+- **Identificador único:** gerado automaticamente para cada tarefa.
+
+Quando uma tarefa pendente ultrapassa a data e o horário definidos, o sistema apresenta um **alerta no terminal**, identificando a tarefa pelo título e pelo ID. Tarefas concluídas não geram esse alerta.
 
 Entradas inválidas são rejeitadas com mensagens orientativas e nova solicitação de dados.
 
@@ -58,9 +53,9 @@ TaskTracker/
 
 ### Responsabilidades
 
-- `src/main.py`: interface de linha de comando, menu, entrada de dados e apresentação das tarefas.
-- `src/tasktracker/models.py`: entidades, enums e validações do domínio.
-- `src/tasktracker/service.py`: casos de uso e armazenamento em memória.
+- `src/main.py`: interface de linha de comando, menu, entrada de dados, apresentação das tarefas e alertas de prazo.
+- `src/tasktracker/models.py`: entidades, enums, identificador e validações do domínio.
+- `src/tasktracker/service.py`: casos de uso, armazenamento em memória e identificação de tarefas atrasadas.
 - `tests/test_service.py`: testes automatizados das regras e casos de uso.
 - `docs/especificacao-sdd.md`: requisitos, regras de negócio, contratos e critérios de aceite.
 - `docs/adrs.md`: decisões arquiteturais do projeto.
@@ -74,11 +69,12 @@ As principais regras implementadas são:
 - A prioridade aceita somente `baixa`, `media` ou `alta`;
 - O status utiliza os estados `pendente`, `em_andamento` e `concluida`;
 - O prazo, quando utilizado pelo núcleo de domínio, deve ser uma data válida;
+- O horário limite, quando informado, deve ser válido;
 - Cada tarefa recebe um identificador único;
 - O identificador permanece o mesmo durante atualizações;
+- Tarefas pendentes com prazo ultrapassado são identificadas como atrasadas e geram alerta no terminal;
+- Tarefas concluídas não são consideradas atrasadas;
 - Consultas de tarefas inexistentes geram erro explícito.
-
-A especificação técnica em `docs/especificacao-sdd.md` é a fonte de verdade dos contratos e critérios de aceite.
 
 ## 5. Tecnologias
 
@@ -142,6 +138,8 @@ Exemplo de fluxo:
 Escolha uma opção:
 ```
 
+Durante o cadastro, o sistema solicita título, descrição, prioridade, data limite e hora limite. Se existir uma tarefa pendente fora do prazo, um alerta é exibido no terminal.
+
 ## 8. Testes automatizados
 
 Execute a suíte com:
@@ -157,7 +155,7 @@ docker compose build
 docker compose run --rm tests
 ```
 
-A suíte cobre criação, validação de título, prioridade, prazo, conclusão, atualização, filtro por status e consulta de tarefa inexistente.
+A suíte cobre criação, validação de título, prioridade, prazo, horário, conclusão, atualização, filtro por status, identificação de tarefas atrasadas e consulta de tarefa inexistente.
 
 ## 9. Fluxo de desenvolvimento
 
@@ -175,7 +173,7 @@ Pull Request
 main
 ```
 
-A evolução do projeto deve ser registrada em commits pequenos e descritivos, permitindo acompanhar a implementação da estrutura, do menu e das regras de validação.
+A evolução do projeto deve ser registrada em commits pequenos e descritivos, permitindo acompanhar a implementação da estrutura, do menu, das regras de validação e dos alertas de prazo.
 
 ## 10. SDD e uso de IA
 
