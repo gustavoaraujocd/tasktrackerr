@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, time
 from enum import StrEnum
 from uuid import uuid4
 
@@ -28,6 +28,7 @@ class Task:
     description: str = ""
     priority: Priority = Priority.MEDIUM
     due_date: date | None = None
+    due_time: time | None = None
     status: Status = Status.PENDING
     id: str = field(default_factory=lambda: str(uuid4()))
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
@@ -47,3 +48,16 @@ class Task:
 
         if self.due_date is not None and not isinstance(self.due_date, date):
             raise ValueError("A data limite deve ser uma data válida.")
+
+        if self.due_time is not None and not isinstance(self.due_time, time):
+            raise ValueError("O horário limite deve ser um horário válido.")
+
+    def is_overdue(self, reference: datetime | None = None) -> bool:
+        """Informa se uma tarefa pendente já passou do prazo definido."""
+        if self.status == Status.DONE or self.due_date is None:
+            return False
+
+        reference = reference or datetime.now()
+        deadline_time = self.due_time or time.max
+        deadline = datetime.combine(self.due_date, deadline_time)
+        return reference > deadline
