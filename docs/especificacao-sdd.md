@@ -10,6 +10,8 @@ Organizar e acompanhar tarefas pessoais, acadêmicas e profissionais com priorid
 - RF04 atualizar dados da tarefa.
 - RF05 concluir tarefa.
 - RF06 filtrar tarefas por status.
+- RF07 informar horário limite opcional.
+- RF08 identificar tarefas pendentes fora do prazo e apresentar alerta no terminal.
 
 ## Requisitos não funcionais
 - RNF01 execução em Python 3.11+.
@@ -23,22 +25,25 @@ Organizar e acompanhar tarefas pessoais, acadêmicas e profissionais com priorid
 - RN02 prioridade aceita: baixa, media ou alta.
 - RN03 status aceita: pendente, em_andamento ou concluida.
 - RN04 prazo, quando informado, deve ser uma data válida.
-- RN05 IDs são únicos e não mudam durante atualizações.
-- RN06 tarefa inexistente gera erro explícito.
+- RN05 horário limite, quando informado, deve ser um horário válido.
+- RN06 IDs são únicos e não mudam durante atualizações.
+- RN07 tarefa pendente com prazo ultrapassado é identificada como atrasada.
+- RN08 tarefa concluída não gera alerta de atraso.
+- RN09 tarefa inexistente gera erro explícito.
 
 ## Contrato de entrada — criação
-Campos: `title` obrigatório; `description` opcional; `priority` opcional; `due_date` opcional.
+Campos: `title` obrigatório; `description` opcional; `priority` opcional; `due_date` opcional; `due_time` opcional.
 
 ## Contrato de saída
-Uma tarefa possui `id`, `title`, `description`, `priority`, `due_date`, `status` e `created_at`.
+Uma tarefa possui `id`, `title`, `description`, `priority`, `due_date`, `due_time`, `status` e `created_at`.
 
 ## Componentes
-- `models.py`: entidades e validações do domínio.
-- `service.py`: casos de uso e armazenamento em memória.
+- `models.py`: entidades, identificador e validações do domínio.
+- `service.py`: casos de uso, armazenamento em memória e identificação de tarefas atrasadas.
 - `tests/test_service.py`: harness automatizado.
 
 ## Critérios de aceite
-A entrega é aceita quando criação, atualização, conclusão, listagem, filtro e validações principais passam no harness automatizado.
+A entrega é aceita quando criação, atualização, conclusão, listagem, filtro, validações principais e identificação de tarefas atrasadas passam no harness automatizado.
 
 ## Refinamento por feedback
 Durante a primeira execução do harness foi identificado uso de `datetime.utcnow()`. A implementação foi refinada para `datetime.now(UTC)`, mantendo timestamps com timezone explícito.
