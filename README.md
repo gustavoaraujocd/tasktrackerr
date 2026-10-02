@@ -102,7 +102,7 @@ python -m venv .venv
 Windows:
 
 ```bash
-.venv\Scripts\activate
+.venv\\Scripts\\activate
 ```
 
 Linux/macOS:
@@ -195,7 +195,13 @@ Estruturação do repositório, versionamento, implementação da aplicação CL
 
 Evolução prevista para empacotamento, containerização com Docker, testes e deploy.
 
-## 12. Equipe
+## 12. Vídeo de apresentação
+
+🎥 **Apresentação da Fase 2 — TaskTracker**
+
+[Assistir ao vídeo de apresentação no YouTube](https://youtu.be/D5hFhHNIHJI)
+
+## 13. Equipe
 
 | Integrante | RA |
 |---|---:|
@@ -209,7 +215,7 @@ Evolução prevista para empacotamento, containerização com Docker, testes e d
 **Curso:** Análise e Desenvolvimento de Sistemas (ADS)  
 **Unidade/Turma:** Taguatinga — Noturno
 
-## 13. Próximos passos
+## 14. Próximos passos
 
 - Refinar os testes da interface CLI;
 - Evoluir os casos de uso conforme os critérios da próxima etapa;
