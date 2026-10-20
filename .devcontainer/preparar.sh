@@ -10,4 +10,4 @@ saida=$(printf '2\n3\n' | docker run --rm -i tasktracker:phase3)
 printf '%s\n' "$saida"
 grep -q 'Nenhuma tarefa cadastrada' <<< "$saida"
 grep -q 'Encerrando o TaskTracker' <<< "$saida"
-printf '\nPreparacao concluida. Para gravar: clear; docker compose run --rm tasktracker-app\n'
+printf '\nPreparacao concluida. Execute: docker compose run --rm tasktracker-app\n'
