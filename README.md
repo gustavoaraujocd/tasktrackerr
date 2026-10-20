@@ -1,6 +1,21 @@
 # TaskTracker
 
-Aplicação acadêmica desenvolvida no **Bootcamp II — Fase 2 (Entrega Intermediária)**, com foco em Engenharia de Software, versionamento profissional com Git/GitHub e implementação das regras de negócio em Python.
+Aplicação acadêmica desenvolvida no **Bootcamp II — Fase 3 (Entrega Final)**, com foco em Engenharia de Software, versionamento profissional com Git/GitHub e implementação das regras de negócio em Python.
+
+**Entrega final individual:** Gustavo Araújo do Carmo - RA 22304113.
+
+## Gravar pelo navegador com GitHub Codespaces
+
+[Abra o TaskTracker no Codespaces](https://codespaces.new/gustavoaraujocd/tasktrackerr).
+Entre na conta do GitHub e crie o ambiente na branch `main`. Aguarde a mensagem
+“Preparacao concluida” no terminal: a configuração instala as dependências, roda
+os testes e constrói as imagens Docker. Isso usa a cota de Codespaces da sua conta.
+
+No terminal do Codespaces, execute os comandos da seção Docker abaixo.
+O código roda em uma máquina Linux na nuvem; não é necessário instalar Docker
+no computador usado para gravar. Ao terminar, pare o Codespaces pelo menu do GitHub.
+
+Roteiro com os links e a ordem das telas: [docs/roteiro-gravacao.md](docs/roteiro-gravacao.md).
 
 ## 1. Visão geral
 
@@ -34,6 +49,7 @@ Entradas inválidas são rejeitadas com mensagens orientativas e nova solicitaç
 TaskTracker/
 ├── .github/
 ├── docs/
+│   ├── planejamento_logico.pdf
 │   ├── adrs.md
 │   └── especificacao-sdd.md
 ├── src/
@@ -102,7 +118,7 @@ python -m venv .venv
 Windows:
 
 ```bash
-.venv\\Scripts\\activate
+.venv\Scripts\activate
 ```
 
 Linux/macOS:
@@ -139,6 +155,97 @@ Escolha uma opção:
 ```
 
 Durante o cadastro, o sistema solicita título, descrição, prioridade, data limite e hora limite. Se existir uma tarefa pendente fora do prazo, um alerta é exibido no terminal.
+
+## Execução com Docker — Fase 3
+
+Pré-requisitos: Git, Docker Engine ou Docker Desktop iniciado e Docker Compose v2
+(`docker compose version`). O computador hospedeiro não precisa ter Python instalado.
+
+Na raiz do repositório, valide a configuração e construa a imagem:
+
+```bash
+docker compose config
+docker build -t tasktracker:phase3 .
+```
+
+Execute a imagem em terminal interativo:
+
+```bash
+docker run --rm -it tasktracker:phase3
+```
+
+Execute a aplicação pelo Compose (recomendado), após o build acima:
+
+```bash
+docker compose run --rm tasktracker-app
+```
+
+Para construir e executar pelo próprio Compose:
+
+```bash
+docker compose run --build --rm tasktracker-app
+```
+
+O serviço `tasktracker-app` usa `stdin_open: true` para manter a entrada aberta
+e `tty: true` para alocar um terminal. A opção 3 encerra a aplicação; `--rm`
+remove o contêiner após o encerramento. Use `run` em um terminal para interagir com
+`input()`. A imagem contém o código copiado no build, sem montar a pasta local.
+
+### Como a imagem é organizada
+
+- `python:3.11-slim`: base com Python 3.11.
+- `WORKDIR /app`: diretório da aplicação.
+- `PYTHONUNBUFFERED=1`: mostra a saída imediatamente.
+- `COPY src/ /app/src/`: inclui a CLI e os módulos de domínio.
+- `CMD ["python", "src/main.py"]`: inicia o menu por padrão.
+- O estágio `tests` instala as dependências de desenvolvimento; a imagem final
+  `runtime` executa somente a CLI, usando a biblioteca padrão do Python.
+- `.dockerignore` exclui histórico Git, caches, ambientes virtuais e arquivos de documentação.
+
+### Testes em contêiner
+
+```bash
+docker compose build tests
+docker compose run --rm tests
+```
+
+O serviço de testes usa um perfil separado. A suíte existente do domínio é mantida,
+e os testes da CLI verificam cadastro, validações, listagem e saída em um processo real.
+
+### Limites e diagnóstico
+
+As tarefas permanecem apenas na memória do processo. Ao sair, os registros são
+perdidos; um volume não acrescentaria persistência a esta implementação.
+Este deploy executa uma CLI local em contêiner e não disponibiliza um site ou uma API.
+
+Se o Docker não responder, inicie o Docker Desktop e confirme `docker version`.
+Se o menu não aceitar digitação, execute os comandos interativos acima em um terminal.
+Após alterações no código, reconstrua a imagem.
+Os alertas de prazo usam o relógio local do processo; o fuso do contêiner pode
+diferir do hospedeiro.
+
+### Rastreabilidade do planejamento
+
+O arquivo `docs/planejamento_logico.pdf` é uma exportação fiel do conteúdo
+já versionado em `docs/planejamento-logico.md`, gerada para esta preparação.
+Ele não foi recuperado como PDF original da entrega da Fase 1.
+
+### Entrega individual da Fase 3
+
+- Manter o repositório público e preservar o histórico das fases anteriores.
+- Gravar vídeo de 5 minutos, horizontal 16:9, com rosto e voz próprios.
+- Mostrar GitHub, Dockerfile, Compose, build e uso real do menu no contêiner.
+- Publicar no YouTube como público ou não listado.
+- Inserir aqui o link do vídeo da Fase 3 quando estiver disponível.
+- Enviar ao AVA um PDF com nome e links ativos do repositório e do novo vídeo.
+
+**Vídeo da Fase 3: pendente de gravação/publicação.**
+O link da Fase 2 abaixo é mantido como histórico e não substitui o novo vídeo.
+
+Referências técnicas:
+[Dockerfile](https://docs.docker.com/reference/dockerfile/),
+[serviços Compose](https://docs.docker.com/reference/compose-file/services/),
+[docker compose run](https://docs.docker.com/reference/cli/docker/compose/run/).
 
 ## 8. Testes automatizados
 
@@ -193,7 +300,7 @@ Estruturação do repositório, versionamento, implementação da aplicação CL
 
 ### Fase 3 — Entrega final
 
-Evolução prevista para empacotamento, containerização com Docker, testes e deploy.
+Empacotamento da CLI em imagem Docker, execução interativa com Docker Compose e documentação dos comandos. A validação no Docker e o vídeo da Fase 3 devem ser concluídos antes do envio ao AVA.
 
 ## 12. Vídeo de apresentação
 
@@ -201,7 +308,7 @@ Evolução prevista para empacotamento, containerização com Docker, testes e d
 
 [Assistir ao vídeo de apresentação no YouTube](https://youtu.be/D5hFhHNIHJI)
 
-## 13. Equipe
+## 13. Equipe registrada nas fases anteriores
 
 | Integrante | RA |
 |---|---:|
@@ -215,9 +322,8 @@ Evolução prevista para empacotamento, containerização com Docker, testes e d
 **Curso:** Análise e Desenvolvimento de Sistemas (ADS)  
 **Unidade/Turma:** Taguatinga — Noturno
 
-## 14. Próximos passos
+## 14. Pendências para concluir a entrega final
 
-- Refinar os testes da interface CLI;
-- Evoluir os casos de uso conforme os critérios da próxima etapa;
-- Consolidar a execução em Docker;
-- Preparar a apresentação técnica e a demonstração da solução.
+- Executar o build e a demonstração interativa no Docker.
+- Gravar e publicar o vídeo individual da Fase 3.
+- Preencher o link do vídeo no README e no PDF de envio ao AVA.
