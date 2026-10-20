@@ -17,3 +17,10 @@
 
 ## ADR-006 — Git Flow simplificado
 **Status:** aceito. **Decisão:** `feature/*` -> PR -> `develop` -> PR -> `main`.
+
+## ADR - Containerização da CLI na Fase 3
+A imagem final passa a iniciar o menu. Um estágio e um serviço separados mantêm
+os testes, sem instalar Pytest na imagem final. O Compose fornece stdin e TTY;
+o comando de uso recomendado é `docker compose run --rm tasktracker-app`.
+Mantemos o armazenamento em memória e o menu da entrega anterior. Não há serviço
+web, porta publicada ou banco de dados nesta etapa.
