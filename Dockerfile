@@ -1,7 +1,14 @@
-FROM python:3.11-slim
+FROM python:3.11-slim AS base
 WORKDIR /app
-COPY pyproject.toml ./
-COPY src ./src
-COPY tests ./tests
-RUN pip install --no-cache-dir -e .[dev]
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+COPY src/ /app/src/
+CMD ["python", "src/main.py"]
+
+FROM base AS tests
+COPY pyproject.toml /app/
+COPY tests/ /app/tests/
+RUN pip install --no-cache-dir ".[dev]"
 CMD ["pytest", "-q"]
+
+FROM base AS runtime
