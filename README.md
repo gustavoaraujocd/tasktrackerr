@@ -4,18 +4,12 @@ Aplicação acadêmica desenvolvida no **Bootcamp II — Fase 3 (Entrega Final)*
 
 **Entrega final individual:** Gustavo Araújo do Carmo - RA 22304113.
 
-## Gravar pelo navegador com GitHub Codespaces
+## Execução pelo navegador (opcional)
 
 [Abra o TaskTracker no Codespaces](https://codespaces.new/gustavoaraujocd/tasktrackerr).
-Entre na conta do GitHub e crie o ambiente na branch `main`. Aguarde a mensagem
-“Preparacao concluida” no terminal: a configuração instala as dependências, roda
-os testes e constrói as imagens Docker. Isso usa a cota de Codespaces da sua conta.
-
-No terminal do Codespaces, execute os comandos da seção Docker abaixo.
-O código roda em uma máquina Linux na nuvem; não é necessário instalar Docker
-no computador usado para gravar. Ao terminar, pare o Codespaces pelo menu do GitHub.
-
-Roteiro com os links e a ordem das telas: [docs/roteiro-gravacao.md](docs/roteiro-gravacao.md).
+Crie o ambiente na branch `main` e aguarde a preparação das dependências.
+A configuração inclui Python, Docker e o script de testes e construção das imagens.
+O Codespaces utiliza a cota da sua conta. Ao terminar, pare o ambiente pelo GitHub.
 
 ## 1. Visão geral
 
@@ -230,17 +224,11 @@ O arquivo `docs/planejamento_logico.pdf` é uma exportação fiel do conteúdo
 já versionado em `docs/planejamento-logico.md`, gerada para esta preparação.
 Ele não foi recuperado como PDF original da entrega da Fase 1.
 
-### Entrega individual da Fase 3
+### Documentação de entrega da Fase 3
 
-- Manter o repositório público e preservar o histórico das fases anteriores.
-- Gravar vídeo de 5 minutos, horizontal 16:9, com rosto e voz próprios.
-- Mostrar GitHub, Dockerfile, Compose, build e uso real do menu no contêiner.
-- Publicar no YouTube como público ou não listado.
-- Inserir aqui o link do vídeo da Fase 3 quando estiver disponível.
-- Enviar ao AVA um PDF com nome e links ativos do repositório e do novo vídeo.
-
-**Vídeo da Fase 3: pendente de gravação/publicação.**
-O link da Fase 2 abaixo é mantido como histórico e não substitui o novo vídeo.
+- [Identificação e informações do projeto](docs/entrega-fase3.md).
+- [PDF de entrega](docs/entrega-final.pdf).
+- Repositório público, histórico e instruções de uso mantidos no GitHub.
 
 Referências técnicas:
 [Dockerfile](https://docs.docker.com/reference/dockerfile/),
@@ -300,15 +288,9 @@ Estruturação do repositório, versionamento, implementação da aplicação CL
 
 ### Fase 3 — Entrega final
 
-Empacotamento da CLI em imagem Docker, execução interativa com Docker Compose e documentação dos comandos. A validação no Docker e o vídeo da Fase 3 devem ser concluídos antes do envio ao AVA.
+Empacotamento da CLI em imagem Docker, execução interativa com Docker Compose e documentação dos comandos. O pipeline do GitHub Actions verifica a construção da imagem, a execução da CLI e a suíte automatizada.
 
-## 12. Vídeo de apresentação
-
-🎥 **Apresentação da Fase 2 — TaskTracker**
-
-[Assistir ao vídeo de apresentação no YouTube](https://youtu.be/D5hFhHNIHJI)
-
-## 13. Equipe registrada nas fases anteriores
+## 12. Equipe registrada nas fases anteriores
 
 | Integrante | RA |
 |---|---:|
@@ -322,8 +304,8 @@ Empacotamento da CLI em imagem Docker, execução interativa com Docker Compose 
 **Curso:** Análise e Desenvolvimento de Sistemas (ADS)  
 **Unidade/Turma:** Taguatinga — Noturno
 
-## 14. Pendências para concluir a entrega final
+## 13. Documentação da entrega final
 
-- Executar o build e a demonstração interativa no Docker.
-- Gravar e publicar o vídeo individual da Fase 3.
-- Preencher o link do vídeo no README e no PDF de envio ao AVA.
+A identificação do estudante e o link do repositório estão disponíveis em
+[docs/entrega-fase3.md](docs/entrega-fase3.md) e no [PDF de entrega](docs/entrega-final.pdf).
+Os comandos de execução e de testes estão nas seções anteriores.
