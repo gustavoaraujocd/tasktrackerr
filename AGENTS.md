@@ -17,4 +17,4 @@ Usar IA como apoio ao fluxo SDD (Spec-Driven Development), mantendo a especifica
 Especificar -> decompor -> gerar/editar -> testar -> revisar -> refinar -> integrar.
 
 ## Agente documentado
-O projeto foi preparado para uso com Codex/ChatGPT como agente de apoio de geração e revisão de código, com estas instruções persistentes no repositório.
+Ferramenta principal: **Codex**, com apoio do ChatGPT para organização, documentação e revisão técnica.

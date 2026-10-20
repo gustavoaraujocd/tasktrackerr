@@ -1,31 +1,26 @@
 # ADRs — Decisões Arquiteturais
 
 ## ADR-001 — Python 3.11
-**Status:** aceito.
-**Decisão:** usar Python 3.11+ no núcleo do TaskTracker.
-**Motivo:** linguagem prevista no planejamento inicial, simples para prototipação e ampla compatibilidade com pytest e Docker.
+**Status:** aceito. **Decisão:** usar Python 3.11+ no núcleo do TaskTracker.
 
-## ADR-002 — Arquitetura de domínio isolado
-**Status:** aceito.
-**Decisão:** separar entidades (`models.py`) dos casos de uso (`service.py`).
-**Motivo:** facilitar evolução iterativa, testes unitários e futura troca da camada de persistência.
+## ADR-002 — Domínio isolado
+**Status:** aceito. **Decisão:** separar entidades (`models.py`) dos casos de uso (`service.py`) para facilitar testes e evolução.
 
-## ADR-003 — Persistência em memória na Entrega 1
-**Status:** aceito.
-**Decisão:** usar um dicionário interno no serviço em vez de banco de dados.
-**Motivo:** a entrega avalia especificação, testabilidade e harness; banco adicionaria complexidade sem benefício para os critérios atuais.
+## ADR-003 — Persistência em memória
+**Status:** aceito. **Decisão:** usar armazenamento em memória nesta Entrega 1 para manter o foco em especificação e testabilidade.
 
-## ADR-004 — Pytest como test harness
-**Status:** aceito.
-**Decisão:** usar pytest para cenários principais e edge cases.
-**Motivo:** execução simples, saída legível e integração direta com automação.
+## ADR-004 — Pytest
+**Status:** aceito. **Decisão:** usar pytest como harness de validação.
 
-## ADR-005 — Docker para reprodutibilidade
-**Status:** aceito.
-**Decisão:** empacotar a execução dos testes em imagem Python slim.
-**Motivo:** reduzir diferenças entre máquinas dos integrantes e ambiente de avaliação.
+## ADR-005 — Docker
+**Status:** aceito. **Decisão:** usar Docker/Docker Compose para reprodutibilidade.
 
 ## ADR-006 — Git Flow simplificado
-**Status:** aceito.
-**Decisão:** `main` recebe integração final, `develop` recebe trabalho da sprint e alterações são produzidas em `feature/*` por Pull Request.
-**Motivo:** impedir trabalho direto na principal e tornar revisão/rastreabilidade explícitas.
+**Status:** aceito. **Decisão:** `feature/*` -> PR -> `develop` -> PR -> `main`.
+
+## ADR - Containerização da CLI na Fase 3
+A imagem final passa a iniciar o menu. Um estágio e um serviço separados mantêm
+os testes, sem instalar Pytest na imagem final. O Compose fornece stdin e TTY;
+o comando de uso recomendado é `docker compose run --rm tasktracker-app`.
+Mantemos o armazenamento em memória e o menu da entrega anterior. Não há serviço
+web, porta publicada ou banco de dados nesta etapa.

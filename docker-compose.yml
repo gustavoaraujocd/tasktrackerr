@@ -1,4 +1,15 @@
 services:
+  tasktracker-app:
+    build:
+      context: .
+      target: runtime
+    image: tasktracker:phase3
+    stdin_open: true
+    tty: true
+
   tests:
-    build: .
-    command: pytest -q
+    build:
+      context: .
+      target: tests
+    profiles: ["tests"]
+    command: ["pytest", "-q"]

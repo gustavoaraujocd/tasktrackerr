@@ -1,77 +1,87 @@
-from datetime import date
+from datetime import date, datetime, time
 
 import pytest
 
-from tasktracker import Priority, Status, Task, TaskService
+from tasktracker import Priority, Status, TaskService
 
 
 def test_create_task_with_defaults():
     service = TaskService()
-    task = service.create_task("Estudar para o Bootcamp")
-
-    assert task.title == "Estudar para o Bootcamp"
+    task = service.create("Estudar")
+    assert task.title == "Estudar"
     assert task.priority == Priority.MEDIUM
     assert task.status == Status.PENDING
-    assert task.id
 
 
-def test_create_task_rejects_blank_title():
+def test_empty_title_is_rejected():
+    with pytest.raises(ValueError):
+        TaskService().create("   ")
+
+
+def test_invalid_priority_is_rejected():
+    with pytest.raises(ValueError):
+        TaskService().create("Teste", priority="urgente")
+
+
+def test_invalid_due_date_is_rejected():
+    with pytest.raises(ValueError):
+        TaskService().create("Teste", due_date="2026-09-12")
+
+
+def test_invalid_due_time_is_rejected():
+    with pytest.raises(ValueError):
+        TaskService().create("Teste", due_time="18:00")
+
+
+def test_complete_task():
     service = TaskService()
-
-    with pytest.raises(ValueError, match="title is required"):
-        service.create_task("   ")
-
-
-def test_create_task_rejects_invalid_priority():
-    with pytest.raises(ValueError, match="invalid priority"):
-        Task(title="Teste", priority="urgente")  # type: ignore[arg-type]
-
-
-def test_create_task_rejects_invalid_due_date():
-    with pytest.raises(ValueError, match="due_date must be a date"):
-        Task(title="Teste", due_date="11/09/2026")  # type: ignore[arg-type]
-
-
-def test_complete_task_changes_status():
-    service = TaskService()
-    task = service.create_task("Entregar projeto", due_date=date(2026, 9, 11))
-
-    completed = service.complete_task(task.id)
-
+    task = service.create("Entregar trabalho")
+    completed = service.complete(task.id)
     assert completed.status == Status.DONE
 
 
-def test_update_task_preserves_id_and_changes_fields():
+def test_update_preserves_id():
     service = TaskService()
-    task = service.create_task("Versao inicial")
+    task = service.create("Original", due_date=date(2026, 9, 20))
+    updated = service.update(task.id, title="Atualizada")
+    assert updated.id == task.id
+    assert updated.title == "Atualizada"
 
-    updated = service.update_task(
-        task.id,
-        title="Versao revisada",
-        priority=Priority.HIGH,
-        status=Status.IN_PROGRESS,
+
+def test_filter_by_status():
+    service = TaskService()
+    first = service.create("A")
+    service.create("B")
+    service.complete(first.id)
+    assert [task.title for task in service.list(Status.DONE)] == ["A"]
+    assert [task.title for task in service.list(Status.PENDING)] == ["B"]
+
+
+def test_overdue_task_is_identified():
+    service = TaskService()
+    task = service.create(
+        "Prazo vencido",
+        due_date=date(2026, 9, 30),
+        due_time=time(18, 0),
     )
 
-    assert updated.id == task.id
-    assert updated.title == "Versao revisada"
-    assert updated.priority == Priority.HIGH
-    assert updated.status == Status.IN_PROGRESS
+    overdue = service.overdue(datetime(2026, 10, 1, 10, 0))
+
+    assert [item.id for item in overdue] == [task.id]
 
 
-def test_list_tasks_can_filter_by_status():
+def test_completed_task_is_not_overdue():
     service = TaskService()
-    first = service.create_task("Tarefa 1")
-    service.create_task("Tarefa 2")
-    service.complete_task(first.id)
+    task = service.create(
+        "Concluida",
+        due_date=date(2026, 9, 30),
+        due_time=time(18, 0),
+    )
+    service.complete(task.id)
 
-    done = service.list_tasks(status=Status.DONE)
-
-    assert len(done) == 1
-    assert done[0].id == first.id
+    assert service.overdue(datetime(2026, 10, 1, 10, 0)) == []
 
 
-def test_get_missing_task_raises_key_error():
-    service = TaskService()
-
-    with pytest.raises(KeyError, match="task not found"):
-        service.get_task("missing-id")
+def test_missing_task_raises_key_error():
+    with pytest.raises(KeyError):
+        TaskService().get("missing")

@@ -1,70 +1,61 @@
 # Especificação Técnica SDD — TaskTracker
 
-## 1. Problema
-Pessoas que conciliam atividades acadêmicas, pessoais e profissionais precisam registrar tarefas, prioridade, prazo e andamento sem depender de controles dispersos. O TaskTracker centraliza esse acompanhamento em um domínio simples, testável e evolutivo.
+## Problema
+Organizar e acompanhar tarefas pessoais, acadêmicas e profissionais com prioridade, prazo e status definidos de forma consistente.
 
-## 2. Escopo da Entrega 1
-Entregar o núcleo de domínio e um test harness automatizado. Interface gráfica, autenticação, banco de dados e integrações externas ficam fora desta etapa.
+## Requisitos funcionais
+- RF01 cadastrar tarefa.
+- RF02 consultar tarefa por ID.
+- RF03 listar tarefas.
+- RF04 atualizar dados da tarefa.
+- RF05 concluir tarefa.
+- RF06 filtrar tarefas por status.
+- RF07 informar horário limite opcional.
+- RF08 identificar tarefas pendentes fora do prazo e apresentar alerta no terminal.
 
-## 3. Requisitos funcionais
-- RF01: cadastrar tarefa com título obrigatório.
-- RF02: registrar descrição opcional.
-- RF03: definir prioridade baixa, média ou alta.
-- RF04: definir prazo opcional como data válida.
-- RF05: listar tarefas cadastradas.
-- RF06: consultar tarefa por identificador.
-- RF07: atualizar dados da tarefa.
-- RF08: alterar tarefa para concluída.
-- RF09: filtrar listagem por status.
+## Requisitos não funcionais
+- RNF01 execução em Python 3.11+.
+- RNF02 suíte automatizada de testes.
+- RNF03 ambiente reproduzível com Docker.
+- RNF04 código modular e testável.
+- RNF05 fluxo de integração via branches e Pull Requests.
 
-## 4. Requisitos não funcionais
-- RNF01: Python 3.11 ou superior.
-- RNF02: suíte automatizada com pytest.
-- RNF03: execução reproduzível via Docker.
-- RNF04: código de domínio independente de UI e persistência.
-- RNF05: fluxo Git baseado em `main`, `develop` e `feature/*`.
+## Regras de negócio
+- RN01 título é obrigatório.
+- RN02 prioridade aceita: baixa, media ou alta.
+- RN03 status aceita: pendente, em_andamento ou concluida.
+- RN04 prazo, quando informado, deve ser uma data válida.
+- RN05 horário limite, quando informado, deve ser um horário válido.
+- RN06 IDs são únicos e não mudam durante atualizações.
+- RN07 tarefa pendente com prazo ultrapassado é identificada como atrasada.
+- RN08 tarefa concluída não gera alerta de atraso.
+- RN09 tarefa inexistente gera erro explícito.
 
-## 5. Regras de negócio
-- RN01: título vazio ou somente espaços é inválido.
-- RN02: prioridade aceita somente `baixa`, `media` e `alta`.
-- RN03: status aceita somente `pendente`, `em_andamento` e `concluida`.
-- RN04: prazo, quando informado, deve ser um objeto de data válido.
-- RN05: cada tarefa recebe identificador único.
-- RN06: concluir uma tarefa altera seu status para `concluida` sem remover o registro.
-- RN07: consulta de ID inexistente retorna erro controlado.
+## Contrato de entrada — criação
+Campos: `title` obrigatório; `description` opcional; `priority` opcional; `due_date` opcional; `due_time` opcional.
 
-## 6. Contratos de entrada e saída
-### create_task
-Entrada: `title: str`, `description: str`, `priority: Priority`, `due_date: date | None`.
-Saída: `Task` criada com `id`, `created_at` e status inicial `pendente`.
-Erros: `ValueError` para dados inválidos.
+## Contrato de saída
+Uma tarefa possui `id`, `title`, `description`, `priority`, `due_date`, `due_time`, `status` e `created_at`.
 
-### get_task
-Entrada: `task_id: str`.
-Saída: `Task` correspondente.
-Erro: `KeyError("task not found")` quando o ID não existe.
+## Componentes
+- `models.py`: entidades, identificador e validações do domínio.
+- `service.py`: casos de uso, armazenamento em memória e identificação de tarefas atrasadas.
+- `tests/test_service.py`: harness automatizado.
 
-### list_tasks
-Entrada: `status: Status | None`.
-Saída: lista de tarefas, opcionalmente filtrada.
+## Critérios de aceite
+A entrega é aceita quando criação, atualização, conclusão, listagem, filtro, validações principais e identificação de tarefas atrasadas passam no harness automatizado.
 
-### update_task
-Entrada: ID e campos opcionais de atualização.
-Saída: tarefa atualizada preservando o ID.
+## Refinamento por feedback
+Durante a primeira execução do harness foi identificado uso de `datetime.utcnow()`. A implementação foi refinada para `datetime.now(UTC)`, mantendo timestamps com timezone explícito.
 
-### complete_task
-Entrada: `task_id: str`.
-Saída: tarefa com status `concluida`.
+## Infraestrutura da Fase 3
+- RNF06: a imagem final deve iniciar a CLI com `python src/main.py`.
+- RNF07: o serviço `tasktracker-app` deve manter stdin aberto e alocar TTY.
+- RNF08: os testes devem continuar executáveis em serviço separado.
+- RNF09: o README deve documentar build, execução com `docker run -it` e Compose.
+- RNF10: a imagem deve conter o código sem depender de bind mount do hospedeiro.
+- Não há alteração dos contratos do domínio ou inclusão de persistência.
+- Aceite: build sem erros; cadastro, rejeição de entrada inválida, listagem e saída
+  dentro do contêiner; suíte de domínio e da CLI aprovada.
 
-## 7. Decomposição em unidades
-- `models.py`: entidades, enums e validações locais.
-- `service.py`: casos de uso do domínio e armazenamento em memória.
-- `tests/test_service.py`: harness de validação executável.
-- `Dockerfile`/`docker-compose.yml`: ambiente reproduzível.
-- `AGENTS.md`: regras de contexto para agente de IA.
-
-## 8. Critérios de aceite
-A Entrega 1 é aceita quando a suíte cobre fluxo principal e casos de borda, todos os testes passam no ambiente local/container e a documentação permite reproduzir a execução.
-
-## 9. Refinamentos por feedback
-A especificação inicial previa apenas planejamento. Para atender à Entrega 1, foi refinada para incluir núcleo executável, contratos explícitos, validação de entradas, filtro por status, Docker e harness automatizado. A persistência foi mantida em memória nesta sprint para preservar isolamento e testabilidade.
+- RNF11: o Codespaces deve preparar Python, Docker, testes e imagens para a demonstracao no navegador.

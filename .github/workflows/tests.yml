@@ -1,0 +1,38 @@
+name: Test Harness
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e .[dev]
+      - run: pytest -q
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Compose
+        run: docker compose config
+      - name: Build runtime
+        run: docker build -t tasktracker:phase3 .
+      - name: Smoke test runtime
+        shell: bash
+        run: |
+          printf '2\n3\n' | docker run --rm -i tasktracker:phase3 > /tmp/tasktracker-smoke.log
+          cat /tmp/tasktracker-smoke.log
+          grep -q "Nenhuma tarefa cadastrada" /tmp/tasktracker-smoke.log
+          grep -q "Encerrando o TaskTracker" /tmp/tasktracker-smoke.log
+      - name: Test in container
+        run: |
+          docker compose build tests
+          docker compose run --rm -T tests
