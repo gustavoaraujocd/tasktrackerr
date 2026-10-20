@@ -47,3 +47,15 @@ A entrega é aceita quando criação, atualização, conclusão, listagem, filtr
 
 ## Refinamento por feedback
 Durante a primeira execução do harness foi identificado uso de `datetime.utcnow()`. A implementação foi refinada para `datetime.now(UTC)`, mantendo timestamps com timezone explícito.
+
+## Infraestrutura da Fase 3
+- RNF06: a imagem final deve iniciar a CLI com `python src/main.py`.
+- RNF07: o serviço `tasktracker-app` deve manter stdin aberto e alocar TTY.
+- RNF08: os testes devem continuar executáveis em serviço separado.
+- RNF09: o README deve documentar build, execução com `docker run -it` e Compose.
+- RNF10: a imagem deve conter o código sem depender de bind mount do hospedeiro.
+- Não há alteração dos contratos do domínio ou inclusão de persistência.
+- Aceite: build sem erros; cadastro, rejeição de entrada inválida, listagem e saída
+  dentro do contêiner; suíte de domínio e da CLI aprovada.
+
+- RNF11: o Codespaces deve preparar Python, Docker, testes e imagens para a demonstracao no navegador.
