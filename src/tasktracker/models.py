@@ -34,6 +34,8 @@ class Task:
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     def __post_init__(self) -> None:
+        if not isinstance(self.title, str) or not isinstance(self.description, str):
+            raise ValueError("Título e descrição devem ser textos.")
         self.title = self.title.strip()
         self.description = self.description.strip()
 
@@ -46,14 +48,25 @@ class Task:
         if not isinstance(self.status, Status):
             raise ValueError("Status inválido.")
 
-        if self.due_date is not None and not isinstance(self.due_date, date):
+        if self.due_date is not None and (
+            not isinstance(self.due_date, date) or isinstance(self.due_date, datetime)
+        ):
             raise ValueError("A data limite deve ser uma data válida.")
 
         if self.due_time is not None and not isinstance(self.due_time, time):
             raise ValueError("O horário limite deve ser um horário válido.")
+        if self.due_time is not None:
+            if self.due_time.tzinfo is not None:
+                raise ValueError("O horário limite deve ser local, sem fuso horário.")
+            if self.due_date is None:
+                raise ValueError("O horário limite exige uma data limite.")
 
     def is_overdue(self, reference: datetime | None = None) -> bool:
         """Informa se uma tarefa pendente já passou do prazo definido."""
+        if reference is not None and (
+            not isinstance(reference, datetime) or reference.tzinfo is not None
+        ):
+            raise ValueError("A referência deve ser datetime local, sem fuso horário.")
         if self.status == Status.DONE or self.due_date is None:
             return False
 

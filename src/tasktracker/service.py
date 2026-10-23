@@ -37,6 +37,8 @@ class TaskService:
             raise KeyError("task not found") from exc
 
     def list(self, status: Status | None = None) -> list[Task]:
+        if status is not None and not isinstance(status, Status):
+            raise ValueError("Status inválido para filtro.")
         tasks = list(self._tasks.values())
         return [task for task in tasks if task.status == status] if status else tasks
 
