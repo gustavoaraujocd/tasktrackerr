@@ -143,3 +143,8 @@ Na inspeção de 23/10/2026, main e develop estavam sem proteção automática; 
 - [Governança e relato de experiência](docs/governanca-e2.md).
 
 Codex foi usado com apoio do ChatGPT. Claude Code, Cursor e Antigravity foram avaliados apenas pela documentação oficial. Não há benchmark comparativo executado nem resultado atribuído às ferramentas não utilizadas.
+
+## PDF consolidado da Entrega 2
+
+[Baixar relatório do Bootcamp III](docs/entrega2-bootcamp3.pdf) | [Versão textual](docs/entrega2-bootcamp3.md).
+O PDF registra a revisão técnica validada e a pendência de homologação humana do PR #16.
