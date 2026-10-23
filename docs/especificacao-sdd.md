@@ -59,3 +59,42 @@ Durante a primeira execução do harness foi identificado uso de `datetime.utcno
   dentro do contêiner; suíte de domínio e da CLI aprovada.
 
 - RNF11: o Codespaces deve preparar Python, Docker, testes e imagens para a demonstracao no navegador.
+
+## Refinamento E2 - Bootcamp III (23/10/2026)
+
+Proposta implementada para homologação no PR da Sprint 2, vinculada à issue #14.
+Os RF01-RF08 permanecem; todos os casos de uso devem ser acessíveis pela CLI.
+As opções 1 (cadastro), 2 (listagem) e 3 (saída) são preservadas. As opções
+4, 5, 6 e 7 oferecem consulta por ID, atualização, conclusão e filtro por status.
+Erros de domínio ou ID inexistente são informados sem encerrar o menu.
+
+### Contratos refinados por testes
+
+- RN10: título e descrição são strings; tipos incompatíveis geram ValueError.
+- RN11: due_date aceita date, mas rejeita datetime (subclasse de date).
+- RN12: due_time exige due_date. Remover a data exige remover o horário no mesmo update.
+- RN13: prazos são horários civis locais sem tzinfo. due_time e reference com
+  tzinfo são rejeitados com ValueError; não há conversão implícita entre fusos.
+  created_at continua UTC-aware e não participa da comparação de prazo.
+- RN14: sem horário, a data vence após 23:59:59.999999. No instante exato do
+  prazo, a tarefa não está atrasada; após esse instante, está. Apenas concluídas
+  são excluídas do alerta entre as tarefas com prazo, inclusive em andamento.
+- RN15: list(status) aceita None ou Status; filtros inválidos geram ValueError.
+- RN16: update valida antes de substituir o registro. Se falhar, nenhum campo
+  armazenado muda; id e created_at não podem ser alterados.
+
+Na CLI, Enter mantém campos durante atualização; '-' limpa descrição/data/hora.
+Status aceita pendente, em_andamento ou concluida. Identificadores são completos.
+Ao receber EOF ou Ctrl+C, a CLI encerra de forma orientada sem traceback.
+
+### Evidência do loop
+
+Os novos testes de contrato foram executados contra a base c946e57:
+8 falhas e 5 aprovações. Evidenciaram data/hora ambíguas, TypeError em comparação
+timezone-aware, AttributeError em texto inválido, filtro silencioso e atualização
+que removia data deixando horário. O log antes da correção é preservado em
+docs/evidencias/antes.log. A execução posterior e o JUnit são publicados ao lado.
+
+Persistência em memória e domínio local monousuário são mantidos da Entrega 1.
+Não há autenticação, banco, API ou promessa de uso em produção. Esses limites
+devem aparecer no README e na defesa das decisões.
