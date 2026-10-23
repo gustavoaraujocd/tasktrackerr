@@ -132,7 +132,7 @@ O Codespaces é opcional, consome cota e não é requisito para execução; seu 
 
 Fluxo: `feature/* -> PR -> develop -> PR -> main`.
 Antes de cada merge: CI aprovado no SHA atual, evidências conferidas, revisão humana independente e comentários resolvidos. O autor não substitui a aprovação de um colega.
-Na inspeção de 23/10/2026, main e develop estavam sem proteção automática; o checklist é uma regra documentada e não um bloqueio técnico do GitHub.
+A proteção de main e develop está ativa no [ruleset 25727805](https://github.com/gustavoaraujocd/tasktrackerr/rules/25727805): PR, uma aprovação independente, checks test/docker, base atualizada, resolução de conversas e aprovação do último push. Sem bypass; force push e exclusão bloqueados. O [milestone da Sprint 2](https://github.com/gustavoaraujocd/tasktrackerr/milestone/1) reúne #14/#15 e PR #16 e segue aberto até o aceite. Convites a estherbastos, JON4TH4NRSC e cauamrad estão pendentes; convite não equivale a revisão.
 
 - [PR #4: revisão histórica da Entrega 1](https://github.com/gustavoaraujocd/tasktrackerr/pull/4).
 - [PR #6: integração histórica](https://github.com/gustavoaraujocd/tasktrackerr/pull/6).

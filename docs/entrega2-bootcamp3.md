@@ -23,7 +23,7 @@ ADS - Taguatinga / Noturno | Snapshot de 23/10/2026.
 
 **Revisão:** [PR #16](https://github.com/gustavoaraujocd/tasktrackerr/pull/16), de feature para develop.
 
-**Estado de homologação:** código e testes publicados para revisão, com captura autêntica do harness incluída. Permanece pendente o fechamento da governança, incluindo revisão independente e promoção para main. O responsável optou por não realizar o experimento comparativo; a análise de ferramentas permanece documental e esse requisito não foi atendido. Este PDF é um snapshot de preparação.
+**Estado de homologação:** código e testes publicados para revisão, com captura autêntica do harness. Proteção de main/develop ativa e milestone criado; convites de colaboração enviados a três colegas e pendentes de aceite. Revisão independente, integração e fechamento ainda pendentes. O responsável optou por não realizar o experimento; a análise de IA permanece documental e esse requisito não foi atendido. Este PDF é um snapshot de preparação.
 
 Esta entrega mantém a identidade do projeto utilizado nas etapas anteriores, mas consolida os requisitos específicos do Bootcamp III: aplicação integrada, regressões, governança, defesa técnica e análise crítica do uso de IA. Cada integrante deverá enviar o mesmo PDF consolidado conforme o enunciado.
 
@@ -156,7 +156,7 @@ As fases acadêmicas anteriores compartilham o mesmo repositório. Os nomes hist
 
 ## Estado e critérios de aceite
 
-Na inspeção de 23/10/2026, main e develop estavam sem proteção automática. Não é correto afirmar que o GitHub impede tecnicamente merge sem revisão. A equipe deve configurar proteção se quiser transformar a política em bloqueio obrigatório; esta entrega não altera permissões administrativas.
+Na inspeção inicial de 23/10/2026, main e develop estavam sem proteção automática. Durante esta preparação, o líder confirmou a autenticação do GitHub e foi ativado o ruleset 25727805 para ambas. Agora são exigidos PR, uma aprovação independente, aprovação do último push, resolução de conversas e checks test/docker do GitHub Actions, com base atualizada. Aprovações antigas são descartadas quando o diff muda. Force push e exclusão são bloqueados; não há atores com bypass.
 
 O PR #16 deve receber revisão real de um integrante diferente do autor. O revisor verifica: RF01–RF08 no menu, contratos RN10–RN16, atualização atômica, 39 testes e CI no SHA atual, comandos Docker, fontes do relatório e ausência de dados indevidos.
 Comentários devem ser resolvidos antes do aceite. Alterações relevantes posteriores exigem nova revisão. A promoção para main ocorre via outro PR após a integração em develop.
@@ -182,6 +182,38 @@ Revisar o diff do PR #16, executar os comandos do README e registrar aprovação
 ## Complemento após recebimento do guia
 
 O aceite não depende apenas do review. A apostila detalha experimento empírico de IA, marco da sprint, participação dos integrantes, evidências visuais e conferências. Consulte auditoria-guia-e2.md. Não há afirmação de que essas atividades já ocorreram. Líder para submissão: Gustavo Araújo do Carmo.
+
+## Preparação de fechamento confirmada
+
+- [Proteção ativa - ruleset 25727805](https://github.com/gustavoaraujocd/tasktrackerr/rules/25727805).
+- [Milestone Sprint 2 - Entrega 2](https://github.com/gustavoaraujocd/tasktrackerr/milestone/1), criado em 23/10/2026, reunindo #14, #15 e PR #16. Continua aberto; não representa sprint já encerrada.
+- Convites de colaboração com escrita enviados, a pedido do líder, para estherbastos, JON4TH4NRSC e cauamrad. Todos estavam pendentes no momento da conferência. Matheus e Rillary ficaram para depois por decisão do responsável.
+- O PR #16 permanece sem aprovação humana confirmada e bloqueado pela regra. Revisão automatizada do bot em commit anterior não é aceite de colega.
+- Sem merge em develop/main, sem fechamento de issues e sem tag de entrega antes do aceite.
+- [Registro verificável da configuração](evidencias/governanca.json).
+
+## Participação observada e limites da evidência
+
+| Integrante | Registro localizado | Estado desta etapa |
+|---|---|---|
+| Gustavo Araújo do Carmo | Autor dos PRs consultados e dos commits do PR #16 | Líder e autor da preparação; não pode aprovar o próprio PR |
+| Esther Diniz Bastos / estherbastos | Aprovação histórica no PR #4 antes do merge | Convite de colaboração pendente; sem revisão do PR #16 |
+| Jonathan Rodrigues Silva Corrêa / JON4TH4NRSC | Aprovação histórica no PR #4 antes do merge | Convite de colaboração pendente; sem revisão do PR #16 |
+| Cauã Gonçalves Xavier Mrad / cauamrad | Aprovação histórica no PR #4 após o merge | Convite de colaboração pendente; sem revisão do PR #16 |
+| Matheus Couto Nogueira | Nenhuma conta confirmada nesta preparação | Convite adiado; participação não demonstrada pelos registros consultados |
+| Rillary Lorranne de Souza Portilho | Nenhuma conta confirmada nesta preparação | Convite adiado; participação não demonstrada pelos registros consultados |
+
+A consulta encontrou 64 commits na história retornada da main, todos associados à conta gustavoaraujocd, e todos os PRs retornados também estavam nessa conta. Isso descreve o histórico consultado; não prova ausência de contribuições fora do GitHub. O critério de todos aparecerem como autores e revisores na sprint ainda não foi demonstrado. Convidar agora não recria participação histórica.
+
+## Sequência após a revisão real
+
+1. Um convidado aceita o acesso e revisa o SHA final do PR #16 com comentário substantivo e aprovação, ou solicita correções.
+2. Com CI e critérios de aceite satisfeitos, integrar o PR #16 em develop.
+3. Abrir PR de develop para main, conferir CI e obter o aceite exigido pela proteção.
+4. Integrar em main, validar o resultado, fechar as issues com registro do aceite e concluir o milestone.
+5. Atualizar o PDF com os links e SHAs finais e marcar a versão submetida com tag/release. Não marcar v2.0 antecipadamente.
+
+A autorização do líder permite preparar e executar essa sequência após o aceite; não substitui a revisão independente exigida.
 
 # 5. Defesa das decisões de arquitetura
 
@@ -221,7 +253,7 @@ Consolidação para Bootcamp III / Entrega 2, 23/10/2026. As decisões da base s
 **Contexto:** é preciso revisar antes de integrar.
 **Decisão:** PR com problema, requisitos, resultados e aceite; aprovação humana de colega diferente do autor e CI no SHA atual.
 **Alternativa:** push direto na main.
-**Consequências:** rastreabilidade e revisão independente; integração depende de disponibilidade da equipe. Sem branch protection, a política pode ser contornada e exige disciplina. Aprovação antiga não homologa código posterior.
+**Consequências:** rastreabilidade e revisão independente; integração depende de disponibilidade da equipe. A ausência inicial de proteção foi corrigida pelo ruleset ativo 25727805 em main/develop, sem bypass e com PR, revisão e checks obrigatórios. Aprovação antiga não homologa código posterior.
 
 ## ADR-007 - Prazos civis locais e timestamps UTC
 **Contexto:** datetime herda date; horário sem data era ignorado; referências aware causavam TypeError.
@@ -299,7 +331,7 @@ Não há LICENSE explícita na árvore inspecionada. Um repositório público pe
 5. Equipe aprova o comportamento e os trade-offs, resolve observações e registra decisão no PR.
 6. Merge em develop e depois em main exige novo aceite compatível com o SHA integrado.
 
-AGENTS.md é orientação textual; sandbox e permissões são controles técnicos distintos. IA não pode emitir a aprovação de um colega, fabricar colaboração ou converter resultado de teste em homologação de produto. No snapshot E2 o PR #16 está aberto, sem aprovação humana independente confirmada. A condição será atendida somente com revisão real, mantendo a rastreabilidade.
+AGENTS.md é orientação textual; sandbox e permissões são controles técnicos distintos. IA não pode emitir a aprovação de um colega, fabricar colaboração ou converter resultado de teste em homologação de produto. No snapshot E2 o PR #16 está aberto, sem aprovação humana independente confirmada. O ruleset 25727805 protege main/develop com aprovação e checks obrigatórios, e o milestone #1 organiza a etapa; três convites de colaboração permanecem pendentes. A condição será atendida somente com revisão real, mantendo a rastreabilidade.
 
 ## Critério de responsabilidade
 
@@ -330,6 +362,7 @@ Consulta documental: 23/10/2026. Recursos e políticas dos produtos podem mudar.
 | Comparação documental e ética | Documentação pronta; experimento não realizado por decisão do responsável, requisito não atendido |
 | Colaboração histórica | PR #4 com duas aprovações anteriores ao merge; issues e PR #6 |
 | Homologação da nova revisão | Pendente de revisão humana real no PR #16; não simulada |
+| Proteção e organização da sprint | Ruleset 25727805 ativo em main/develop; milestone #1 criado e aberto; três convites pendentes |
 | Publicação da nova versão em main | Pendente de aceite e promoção via develop e novo PR |
 | Evidência visual dos testes | Captura autêntica incluída, com comando e 39 aprovados na mesma tela |
 | Requisitos detalhados da apostila | Auditoria a seguir: governança final e conferências ainda pendentes |
@@ -363,9 +396,9 @@ O responsável decidiu não realizar o experimento de IA. A comparação permane
 
 | Item | Estado e ação necessária |
 |---|---|
-| Participação e revisão da equipe (p.11-12) | PR #16 sem aprovação independente confirmada. Não fabricar autores, comentários ou aprovações. Conferir a participação efetiva de todos. |
+| Participação e revisão da equipe (p.11-12) | Convites a estherbastos, JON4TH4NRSC e cauamrad enviados e pendentes. PR #16 sem aprovação humana. Participação histórica auditada; autoria/revisão de todos na sprint ainda não demonstrada. |
 | Publicação estável (p.3 e 23) | Código E2 está na feature. Integrar via develop e main após aceite. |
-| Milestone, fechamento e proteção (p.5-6 e 23) | Issues #14/#15 seguem abertas; milestone da Sprint 2 e proteção de branches não foram configurados nesta preparação. O registro atual não deve afirmar que existem. |
+| Milestone, fechamento e proteção (p.5-6 e 23) | Proteção de main/develop ativa (ruleset 25727805); milestone #1 criado e vinculado a #14/#15/PR #16. Fechamento e tag continuam aguardando revisão e integração. |
 | Evidência visual do harness (p.21) | Concluída: captura autêntica do GitHub Actions, run #29, comando e 39 passed in 0.23s visíveis; incluída no PDF. |
 | Versão submetida (p.21-23) | Commit técnico está identificado, mas tag/release de submissão deve ser criada após a homologação final; não marcar versão ainda incompleta como v2.0. |
 | Conferência externa e em equipe (p.14, 16 e 22) | Falta confirmar clone limpo por pessoa externa e leitura final do PDF por outro integrante. O relato atual é síntese técnica dos registros, não depoimento coletivo. |

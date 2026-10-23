@@ -62,7 +62,7 @@ Não há LICENSE explícita na árvore inspecionada. Um repositório público pe
 5. Equipe aprova o comportamento e os trade-offs, resolve observações e registra decisão no PR.
 6. Merge em develop e depois em main exige novo aceite compatível com o SHA integrado.
 
-AGENTS.md é orientação textual; sandbox e permissões são controles técnicos distintos. IA não pode emitir a aprovação de um colega, fabricar colaboração ou converter resultado de teste em homologação de produto. No snapshot E2 o PR #16 está aberto, sem aprovação humana independente confirmada. A condição será atendida somente com revisão real, mantendo a rastreabilidade.
+AGENTS.md é orientação textual; sandbox e permissões são controles técnicos distintos. IA não pode emitir a aprovação de um colega, fabricar colaboração ou converter resultado de teste em homologação de produto. No snapshot E2 o PR #16 está aberto, sem aprovação humana independente confirmada. O ruleset 25727805 protege main/develop com aprovação e checks obrigatórios, e o milestone #1 organiza a etapa; três convites de colaboração permanecem pendentes. A condição será atendida somente com revisão real, mantendo a rastreabilidade.
 
 ## Critério de responsabilidade
 

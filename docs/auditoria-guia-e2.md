@@ -23,9 +23,9 @@ O responsável decidiu não realizar o experimento de IA. A comparação permane
 
 | Item | Estado e ação necessária |
 |---|---|
-| Participação e revisão da equipe (p.11-12) | PR #16 sem aprovação independente confirmada. Não fabricar autores, comentários ou aprovações. Conferir a participação efetiva de todos. |
+| Participação e revisão da equipe (p.11-12) | Convites a estherbastos, JON4TH4NRSC e cauamrad enviados e pendentes. PR #16 sem aprovação humana. Participação histórica auditada; autoria/revisão de todos na sprint ainda não demonstrada. |
 | Publicação estável (p.3 e 23) | Código E2 está na feature. Integrar via develop e main após aceite. |
-| Milestone, fechamento e proteção (p.5-6 e 23) | Issues #14/#15 seguem abertas; milestone da Sprint 2 e proteção de branches não foram configurados nesta preparação. O registro atual não deve afirmar que existem. |
+| Milestone, fechamento e proteção (p.5-6 e 23) | Proteção de main/develop ativa (ruleset 25727805); milestone #1 criado e vinculado a #14/#15/PR #16. Fechamento e tag continuam aguardando revisão e integração. |
 | Evidência visual do harness (p.21) | Concluída: captura autêntica do GitHub Actions, run #29, comando e 39 passed in 0.23s visíveis; incluída no PDF. |
 | Versão submetida (p.21-23) | Commit técnico está identificado, mas tag/release de submissão deve ser criada após a homologação final; não marcar versão ainda incompleta como v2.0. |
 | Conferência externa e em equipe (p.14, 16 e 22) | Falta confirmar clone limpo por pessoa externa e leitura final do PDF por outro integrante. O relato atual é síntese técnica dos registros, não depoimento coletivo. |

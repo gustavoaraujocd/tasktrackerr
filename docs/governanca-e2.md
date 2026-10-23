@@ -15,7 +15,7 @@ As fases acadêmicas anteriores compartilham o mesmo repositório. Os nomes hist
 
 ## Estado e critérios de aceite
 
-Na inspeção de 23/10/2026, main e develop estavam sem proteção automática. Não é correto afirmar que o GitHub impede tecnicamente merge sem revisão. A equipe deve configurar proteção se quiser transformar a política em bloqueio obrigatório; esta entrega não altera permissões administrativas.
+Na inspeção inicial de 23/10/2026, main e develop estavam sem proteção automática. Durante esta preparação, o líder confirmou a autenticação do GitHub e foi ativado o ruleset 25727805 para ambas. Agora são exigidos PR, uma aprovação independente, aprovação do último push, resolução de conversas e checks test/docker do GitHub Actions, com base atualizada. Aprovações antigas são descartadas quando o diff muda. Force push e exclusão são bloqueados; não há atores com bypass.
 
 O PR #16 deve receber revisão real de um integrante diferente do autor. O revisor verifica: RF01–RF08 no menu, contratos RN10–RN16, atualização atômica, 39 testes e CI no SHA atual, comandos Docker, fontes do relatório e ausência de dados indevidos.
 Comentários devem ser resolvidos antes do aceite. Alterações relevantes posteriores exigem nova revisão. A promoção para main ocorre via outro PR após a integração em develop.
@@ -41,3 +41,35 @@ Revisar o diff do PR #16, executar os comandos do README e registrar aprovação
 ## Complemento após recebimento do guia
 
 O aceite não depende apenas do review. A apostila detalha experimento empírico de IA, marco da sprint, participação dos integrantes, evidências visuais e conferências. Consulte auditoria-guia-e2.md. Não há afirmação de que essas atividades já ocorreram. Líder para submissão: Gustavo Araújo do Carmo.
+
+## Preparação de fechamento confirmada
+
+- [Proteção ativa - ruleset 25727805](https://github.com/gustavoaraujocd/tasktrackerr/rules/25727805).
+- [Milestone Sprint 2 - Entrega 2](https://github.com/gustavoaraujocd/tasktrackerr/milestone/1), criado em 23/10/2026, reunindo #14, #15 e PR #16. Continua aberto; não representa sprint já encerrada.
+- Convites de colaboração com escrita enviados, a pedido do líder, para estherbastos, JON4TH4NRSC e cauamrad. Todos estavam pendentes no momento da conferência. Matheus e Rillary ficaram para depois por decisão do responsável.
+- O PR #16 permanece sem aprovação humana confirmada e bloqueado pela regra. Revisão automatizada do bot em commit anterior não é aceite de colega.
+- Sem merge em develop/main, sem fechamento de issues e sem tag de entrega antes do aceite.
+- [Registro verificável da configuração](evidencias/governanca.json).
+
+## Participação observada e limites da evidência
+
+| Integrante | Registro localizado | Estado desta etapa |
+|---|---|---|
+| Gustavo Araújo do Carmo | Autor dos PRs consultados e dos commits do PR #16 | Líder e autor da preparação; não pode aprovar o próprio PR |
+| Esther Diniz Bastos / estherbastos | Aprovação histórica no PR #4 antes do merge | Convite de colaboração pendente; sem revisão do PR #16 |
+| Jonathan Rodrigues Silva Corrêa / JON4TH4NRSC | Aprovação histórica no PR #4 antes do merge | Convite de colaboração pendente; sem revisão do PR #16 |
+| Cauã Gonçalves Xavier Mrad / cauamrad | Aprovação histórica no PR #4 após o merge | Convite de colaboração pendente; sem revisão do PR #16 |
+| Matheus Couto Nogueira | Nenhuma conta confirmada nesta preparação | Convite adiado; participação não demonstrada pelos registros consultados |
+| Rillary Lorranne de Souza Portilho | Nenhuma conta confirmada nesta preparação | Convite adiado; participação não demonstrada pelos registros consultados |
+
+A consulta encontrou 64 commits na história retornada da main, todos associados à conta gustavoaraujocd, e todos os PRs retornados também estavam nessa conta. Isso descreve o histórico consultado; não prova ausência de contribuições fora do GitHub. O critério de todos aparecerem como autores e revisores na sprint ainda não foi demonstrado. Convidar agora não recria participação histórica.
+
+## Sequência após a revisão real
+
+1. Um convidado aceita o acesso e revisa o SHA final do PR #16 com comentário substantivo e aprovação, ou solicita correções.
+2. Com CI e critérios de aceite satisfeitos, integrar o PR #16 em develop.
+3. Abrir PR de develop para main, conferir CI e obter o aceite exigido pela proteção.
+4. Integrar em main, validar o resultado, fechar as issues com registro do aceite e concluir o milestone.
+5. Atualizar o PDF com os links e SHAs finais e marcar a versão submetida com tag/release. Não marcar v2.0 antecipadamente.
+
+A autorização do líder permite preparar e executar essa sequência após o aceite; não substitui a revisão independente exigida.

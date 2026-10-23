@@ -36,7 +36,7 @@ Consolidação para Bootcamp III / Entrega 2, 23/10/2026. As decisões da base s
 **Contexto:** é preciso revisar antes de integrar.
 **Decisão:** PR com problema, requisitos, resultados e aceite; aprovação humana de colega diferente do autor e CI no SHA atual.
 **Alternativa:** push direto na main.
-**Consequências:** rastreabilidade e revisão independente; integração depende de disponibilidade da equipe. Sem branch protection, a política pode ser contornada e exige disciplina. Aprovação antiga não homologa código posterior.
+**Consequências:** rastreabilidade e revisão independente; integração depende de disponibilidade da equipe. A ausência inicial de proteção foi corrigida pelo ruleset ativo 25727805 em main/develop, sem bypass e com PR, revisão e checks obrigatórios. Aprovação antiga não homologa código posterior.
 
 ## ADR-007 - Prazos civis locais e timestamps UTC
 **Contexto:** datetime herda date; horário sem data era ignorado; referências aware causavam TypeError.
