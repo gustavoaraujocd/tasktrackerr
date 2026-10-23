@@ -13,3 +13,8 @@ data
 work
 outputs
 *.zip
+
+.env
+.env.*
+*.pem
+*.key

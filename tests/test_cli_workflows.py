@@ -72,3 +72,19 @@ def test_eof_closes_cleanly(monkeypatch, capsys):
     spec.loader.exec_module(cli)
     cli.main()
     assert "Entrada encerrada" in capsys.readouterr().out
+
+
+def test_blank_edit_keeps_fields(monkeypatch):
+    service = TaskService()
+    task = service.create("Original", description="Desc")
+    run_menu(monkeypatch, service, ["5", task.id, "", "", "", "", "", "", "3"])
+    assert service.get(task.id).title == "Original"
+    assert service.get(task.id).description == "Desc"
+
+
+def test_removing_only_date_is_rejected_in_menu(monkeypatch, capsys):
+    service = TaskService()
+    task = service.create("Original", due_date=date(2099, 12, 31), due_time=time(10))
+    run_menu(monkeypatch, service, ["5", task.id, "Outra", "", "", "-", "", "", "3"])
+    assert service.get(task.id).title == "Original"
+    assert "exige uma data" in capsys.readouterr().out

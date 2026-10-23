@@ -85,3 +85,16 @@ def test_invalid_status_update_keeps_original():
     with pytest.raises(ValueError):
         service.update(task.id, status="qualquer")
     assert service.get(task.id).status is Status.PENDING
+
+
+def test_in_progress_task_still_alerts_when_overdue():
+    service = TaskService()
+    task = service.create("Em execução", due_date=date(2026, 10, 22))
+    service.update(task.id, status=Status.IN_PROGRESS)
+    assert [t.id for t in service.overdue(datetime(2026, 10, 23))] == [task.id]
+
+
+def test_non_datetime_reference_is_rejected():
+    task = TaskService().create("Prazo", due_date=date(2026, 10, 23))
+    with pytest.raises(ValueError):
+        task.is_overdue("2026-10-24")
