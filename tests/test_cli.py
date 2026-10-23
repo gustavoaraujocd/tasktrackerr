@@ -45,3 +45,11 @@ def test_registration_recovers_from_invalid_input_and_lists_task():
         "31/12/2099 às 18:30", "Pendente", "Encerrando o TaskTracker",
     ]:
         assert expected in result.stdout
+
+
+def test_registration_without_deadline_and_eof():
+    result = run_cli(["1", "Sem prazo", "", "Média", "", "2"])
+    assert result.returncode == 0, result.stderr
+    assert "Sem prazo" in result.stdout
+    assert "Não informada" in result.stdout
+    assert "Entrada encerrada" in result.stdout

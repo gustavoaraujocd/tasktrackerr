@@ -22,3 +22,12 @@ Thumbs.db
 # Dados locais
 *.db
 *.sqlite3
+
+# Evidências sanitizadas do harness, versionadas deliberadamente
+!docs/evidencias/*.log
+
+# Segredos locais
+.env
+.env.*
+*.pem
+*.key
