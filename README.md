@@ -160,4 +160,4 @@ A comparação documental não encerra o requisito de experimento com dados pró
 - [Registro de erros](docs/ERROS.md).
 - [Log integral do job Docker](logs_testes_final.txt).
 
-Além da revisão do PR, permanecem pendentes o experimento real, a captura autêntica do harness e o fechamento da governança descrito na auditoria.
+A captura autêntica do harness foi concluída e está em [docs/evidencias/testes-github-actions.png](docs/evidencias/testes-github-actions.png), com comando e 39 testes aprovados. Permanecem as conferências e o fechamento da governança descritos na auditoria. O responsável retirou o experimento da lista; a comparação continua documental e o requisito empírico não foi atendido.

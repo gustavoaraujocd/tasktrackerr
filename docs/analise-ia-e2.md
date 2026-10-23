@@ -4,7 +4,7 @@ Bootcamp III - Entrega 2 | TaskTracker | 23/10/2026.
 
 ## Estado após leitura da apostila
 
-A apostila (p.17-18) exige comparação empírica. Esta seção documental é apoio e não atende sozinha a esse item. O experimento ainda não foi executado; o protocolo está em [experimento-ia.md](experimento-ia.md). Não há resultados de duas ferramentas ou configurações para declarar.
+A apostila (p.17-18) exige comparação empírica. Esta seção documental é apoio e não atende sozinha a esse item. O responsável decidiu não executar o experimento e retirá-lo da lista de atividades. O requisito empírico não foi atendido; o protocolo anterior permanece apenas como registro em [experimento-ia.md](experimento-ia.md). Não há resultados de duas ferramentas ou configurações para declarar.
 
 ## Método e limites da comparação
 
