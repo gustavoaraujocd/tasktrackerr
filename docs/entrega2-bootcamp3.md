@@ -15,13 +15,15 @@ ADS - Taguatinga / Noturno | Snapshot de 23/10/2026.
 | Rillary Lorranne de Souza Portilho | 22450936 |
 | Gustavo Araújo do Carmo | 22304113 |
 
+**Líder para submissão:** Gustavo Araújo do Carmo - RA 22304113.
+
 **Repositório público:** [github.com/gustavoaraujocd/tasktrackerr](https://github.com/gustavoaraujocd/tasktrackerr).
 
 **Versão desta etapa:** [feature/bootcamp3-entrega2](https://github.com/gustavoaraujocd/tasktrackerr/tree/feature/bootcamp3-entrega2).
 
 **Revisão:** [PR #16](https://github.com/gustavoaraujocd/tasktrackerr/pull/16), de feature para develop.
 
-**Estado de homologação:** implementação, testes e documentação publicados para revisão. O PR desta etapa está aberto; aprovação humana independente e promoção para main permanecem pendentes. Este PDF não antecipa aprovação ou fechamento de sprint.
+**Estado de homologação:** código e testes publicados para revisão. Após leitura da apostila, permanecem pendentes o experimento comparativo com dados próprios, a captura autêntica do harness e o fechamento da governança, incluindo revisão independente e promoção para main. Este PDF é um snapshot de preparação, não uma declaração de entrega concluída.
 
 Esta entrega mantém a identidade do projeto utilizado nas etapas anteriores, mas consolida os requisitos específicos do Bootcamp III: aplicação integrada, regressões, governança, defesa técnica e análise crítica do uso de IA. Cada integrante deverá enviar o mesmo PDF consolidado conforme o enunciado.
 
@@ -33,7 +35,8 @@ Esta entrega mantém a identidade do projeto utilizado nas etapas anteriores, ma
 4. Governança, sprints e relato de experiência.
 5. Decisões de arquitetura e trade-offs.
 6. Comparação de ferramentas, ética e segurança da IA.
-7. Conferência de submissão e estado da homologação.
+7. Conferência com a apostila e estado da homologação.
+8. Auditoria de requisitos detalhados do guia.
 
 # 1. Solução integrada e arquitetura
 
@@ -172,6 +175,10 @@ O apoio da IA ampliou a capacidade de produzir código, testes e documentação,
 
 Revisar o diff do PR #16, executar os comandos do README e registrar aprovação ou solicitações de ajuste no GitHub com a conta de um colega. Depois, integrar por PR em develop e main e atualizar o estado desta documentação. Este registro descreve o snapshot atual e não antecipa aprovações futuras.
 
+## Complemento após recebimento do guia
+
+O aceite não depende apenas do review. A apostila detalha experimento empírico de IA, marco da sprint, participação dos integrantes, evidências visuais e conferências. Consulte auditoria-guia-e2.md. Não há afirmação de que essas atividades já ocorreram. Líder para submissão: Gustavo Araújo do Carmo.
+
 # 5. Defesa das decisões de arquitetura
 
 Consolidação para Bootcamp III / Entrega 2, 23/10/2026. As decisões da base são preservadas; os refinamentos E2 seguem para homologação no PR #16.
@@ -227,6 +234,10 @@ Consolidação para Bootcamp III / Entrega 2, 23/10/2026. As decisões da base s
 # 6. Análise comparativa e ético-técnica
 
 Bootcamp III - Entrega 2 | TaskTracker | 23/10/2026.
+
+## Estado após leitura da apostila
+
+A apostila (p.17-18) exige comparação empírica. Esta seção documental é apoio e não atende sozinha a esse item. O experimento ainda não foi executado; o protocolo está em [experimento-ia.md](experimento-ia.md). Não há resultados de duas ferramentas ou configurações para declarar.
 
 ## Método e limites da comparação
 
@@ -312,11 +323,47 @@ Consulta documental: 23/10/2026. Recursos e políticas dos produtos podem mudar.
 | Solução integrada | Código publicado na branch da E2, com menu para RF01-RF08 |
 | Test harness integralmente aprovado | 39/39 no snapshot técnico; logs, JUnit e CI vinculados |
 | Refinamento e defesa | Falhas antes/depois, RN10-RN16, oito ADRs e limites explícitos |
-| Comparação e ética | Matriz documental de quatro ferramentas e análise crítica fundamentada |
+| Comparação documental e ética | Material de apoio pronto; falta experimento comparativo com dados próprios |
 | Colaboração histórica | PR #4 com duas aprovações anteriores ao merge; issues e PR #6 |
 | Homologação da nova revisão | Pendente de revisão humana real no PR #16; não simulada |
 | Publicação da nova versão em main | Pendente de aceite e promoção via develop e novo PR |
+| Requisitos detalhados da apostila | Auditoria a seguir: governança final, captura do harness e conferências ainda pendentes |
 
-O material técnico está preparado para a avaliação da equipe. A condição de governança restante é concreta: revisar o diff e os testes da revisão atual, registrar a decisão no GitHub e integrar apenas após o aceite. O estado do relatório deve ser atualizado quando essa decisão ocorrer.
+O material precisa ser complementado com o experimento real e as evidências finais descritas na auditoria. A equipe deverá revisar o diff, registrar o aceite, concluir a governança e atualizar este snapshot antes da submissão. Aprovações históricas não homologam esta versão.
 
 Base documental fornecida pelo estudante: Entrega_1_TaskTracker_FINAL_Moodle_Bootcamp_III.pdf, oito páginas. Evidências do GitHub e fontes oficiais consultadas em 23/10/2026. A revisão futura deve preservar a distinção entre fatos observados, capacidades documentadas e hipóteses.
+
+# 8. Adequação ao guia do professor
+
+Fontes fornecidas: Apostila_Bootcamp_III_Entrega_02.pdf (26 páginas), Tutorial_StudyRoom_Bootcamp_III.pdf (21 páginas) e studyroom-api.zip. O ZIP foi lido como exemplo, sem executar código, hooks ou reaproveitar histórico Git do StudyRoom.
+
+## O projeto permanece TaskTracker
+O tutorial orienta transpor o método, não copiar o sistema StudyRoom. A completude é determinada pela SPEC do projeto. Não é necessário converter a CLI em API de reservas, adotar FastAPI ou reproduzir os 23 testes do exemplo.
+
+## Preparado no TaskTracker
+- RF01-RF08 acessíveis no menu e 39 testes aprovados.
+- README, diagrama, oito ADRs e análise ético-técnica.
+- ERROS.md com sete entradas reais e rastreabilidade E/RN/testes/PR.
+- Registro R-E2-01 a R-E2-05 na especificação.
+- DEMO.md com fluxo completo e critérios de observação.
+- Logs antes/depois, JUnit e extrato de CI; log integral do job Docker anexado como logs_testes_final.txt.
+- Líder identificado: Gustavo Araújo do Carmo, RA 22304113.
+- Protocolo de experimento preparado em experimento-ia.md.
+
+## Pendências reais segundo o guia
+
+| Item | Estado e ação necessária |
+|---|---|
+| Comparação com dados próprios (apostila p.17-18 e 23) | Não executada. Aplicar o protocolo; matriz documental é só apoio. Duas configurações do Codex são alternativa prevista se outra ferramenta for inviável. |
+| Participação e revisão da equipe (p.11-12) | PR #16 sem aprovação independente confirmada. Não fabricar autores, comentários ou aprovações. Conferir a participação efetiva de todos. |
+| Publicação estável (p.3 e 23) | Código E2 está na feature. Integrar via develop e main após aceite. |
+| Milestone, fechamento e proteção (p.5-6 e 23) | Issues #14/#15 seguem abertas; milestone da Sprint 2 e proteção de branches não foram configurados nesta preparação. O registro atual não deve afirmar que existem. |
+| Evidência visual do harness (p.21) | Logs reais estão disponíveis; falta captura autêntica com comando e resumo visíveis no mesmo quadro. Não produzir imagem simulada de terminal. |
+| Versão submetida (p.21-23) | Commit técnico está identificado, mas tag/release de submissão deve ser criada após a homologação final; não marcar versão ainda incompleta como v2.0. |
+| Conferência externa e em equipe (p.14, 16 e 22) | Falta confirmar clone limpo por pessoa externa e leitura final do PDF por outro integrante. O relato atual é síntese técnica dos registros, não depoimento coletivo. |
+| Termos da ferramenta efetivamente usada (p.19) | Identificar o plano/contrato efetivo para conferir retenção, treinamento e titularidade aplicáveis; a documentação genérica de segurança não prova as condições da conta. |
+
+A apostila acrescenta detalhamento que não estava explícito no enunciado anterior. A entrega não tem somente a pendência de review: comparação prática, evidências e fechamento da governança também precisam ser concluídos.
+
+## Histórico e autenticidade
+Os números de reservas e resultados do StudyRoom são ilustrativos ou relativos àquele exemplo. Não pertencem ao TaskTracker. Nenhuma reunião, função dos colegas, execução de outra IA ou revisão por pares deve ser inventada para preencher o checklist.

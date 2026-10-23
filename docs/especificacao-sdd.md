@@ -98,3 +98,15 @@ docs/evidencias/antes.log. A execução posterior e o JUnit são publicados ao l
 Persistência em memória e domínio local monousuário são mantidos da Entrega 1.
 Não há autenticação, banco, API ou promessa de uso em produção. Esses limites
 devem aparecer no README e na defesa das decisões.
+
+## Registro de re-especificações E2 (rastreabilidade)
+
+| ID | Origem | Decisão | Evidência |
+|---|---|---|---|
+| R-E2-01 | E-01 | RN11 rejeita datetime como data civil | test_datetime_is_not_a_calendar_due_date |
+| R-E2-02 | E-02 / E-06 | RN12 exige data para horário; RN16 mantém atualização atômica | test_time_without_date_is_rejected; test_invalid_update_does_not_change_stored_task |
+| R-E2-03 | E-03 | RN13 explicita fuso; RN14 define fronteira do prazo | test_aware_reference_has_explicit_validation; test_exact_deadline_is_not_overdue |
+| R-E2-04 | E-04 | RN15 rejeita filtro inválido | test_invalid_filter_is_not_silently_an_empty_result |
+| R-E2-05 | E-05 | RN10 define texto e ValueError | test_invalid_text_type_uses_domain_error |
+
+Origem: [ERROS.md](ERROS.md), issue #14 e PR #16. Contratos foram refinados antes da correção, na preparação de 23/10/2026, sem atribuir homologação à equipe. A ordem numérica de seções do StudyRoom é um modelo de organização; os contratos do TaskTracker permanecem neste arquivo.

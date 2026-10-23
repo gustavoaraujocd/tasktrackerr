@@ -17,6 +17,9 @@ Gerenciador de tarefas em Python, com CLI, domínio isolado, testes automatizado
 
 ADS - Taguatinga / Noturno.
 
+**Líder para submissão:** Gustavo Araújo do Carmo - RA 22304113.
+
+
 ## Instalação e execução
 
 Python 3.11+ e Git. No Windows use `python`; Linux/macOS podem usar `python3`.
@@ -148,3 +151,13 @@ Codex foi usado com apoio do ChatGPT. Claude Code, Cursor e Antigravity foram av
 
 [Baixar relatório do Bootcamp III](docs/entrega2-bootcamp3.pdf) | [Versão textual](docs/entrega2-bootcamp3.md).
 O PDF registra a revisão técnica validada e a pendência de homologação humana do PR #16.
+
+## Conferência com a apostila da Entrega 2
+
+A comparação documental não encerra o requisito de experimento com dados próprios. Consulte a [auditoria do guia](docs/auditoria-guia-e2.md) e o [protocolo comparativo](docs/experimento-ia.md).
+
+- [Demonstração ponta a ponta](docs/DEMO.md).
+- [Registro de erros](docs/ERROS.md).
+- [Log integral do job Docker](logs_testes_final.txt).
+
+Além da revisão do PR, permanecem pendentes o experimento real, a captura autêntica do harness e o fechamento da governança descrito na auditoria.

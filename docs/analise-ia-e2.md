@@ -2,6 +2,10 @@
 
 Bootcamp III - Entrega 2 | TaskTracker | 23/10/2026.
 
+## Estado após leitura da apostila
+
+A apostila (p.17-18) exige comparação empírica. Esta seção documental é apoio e não atende sozinha a esse item. O experimento ainda não foi executado; o protocolo está em [experimento-ia.md](experimento-ia.md). Não há resultados de duas ferramentas ou configurações para declarar.
+
 ## Método e limites da comparação
 
 Uso comprovado neste projeto: Codex, com apoio do ChatGPT na organização técnica. O responsável confirmou que não utilizou Claude Code, Cursor ou Antigravity. A matriz abaixo é uma avaliação documental de capacidades e adequação ao fluxo; não é experimento controlado, ranking de qualidade ou medição de produtividade. Não foram medidos tempo economizado, custo, taxa de acerto ou comparação entre modelos. A interface Codex utilizada no trabalho é a aplicação integrada; não se afirma que todos os comandos foram executados especificamente pelo produto Codex CLI.
