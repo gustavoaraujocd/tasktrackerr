@@ -1,0 +1,133 @@
+FFFFFFF...F..                                                            [100%]
+================================== FAILURES ===================================
+__________________ test_datetime_is_not_a_calendar_due_date ___________________
+
+    def test_datetime_is_not_a_calendar_due_date():
+>       with pytest.raises(ValueError, match="data"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\test_refinements.py:10: Failed
+_____________________ test_time_without_date_is_rejected ______________________
+
+    def test_time_without_date_is_rejected():
+>       with pytest.raises(ValueError, match="data"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\test_refinements.py:15: Failed
+____________________ test_aware_deadline_time_is_rejected _____________________
+
+    def test_aware_deadline_time_is_rejected():
+>       with pytest.raises(ValueError, match="fuso"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\test_refinements.py:20: Failed
+________________ test_aware_reference_has_explicit_validation _________________
+
+    def test_aware_reference_has_explicit_validation():
+        task = TaskService().create("Prazo", due_date=date(2026, 10, 23))
+        with pytest.raises(ValueError, match="fuso"):
+>           task.is_overdue(datetime(2026, 10, 24, tzinfo=UTC))
+
+tests\test_refinements.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Task(title='Prazo', description='', priority=<Priority.MEDIUM: 'media'>, due_date=datetime.date(2026, 10, 23), due_tim...-46b2-a857-5c3d1e1597c6', created_at=datetime.datetime(2026, 10, 23, 12, 45, 55, 844342, tzinfo=datetime.timezone.utc))
+reference = datetime.datetime(2026, 10, 24, 0, 0, tzinfo=datetime.timezone.utc)
+
+    def is_overdue(self, reference: datetime | None = None) -> bool:
+        """Informa se uma tarefa pendente já passou do prazo definido."""
+        if self.status == Status.DONE or self.due_date is None:
+            return False
+    
+        reference = reference or datetime.now()
+        deadline_time = self.due_time or time.max
+        deadline = datetime.combine(self.due_date, deadline_time)
+>       return reference > deadline
+               ^^^^^^^^^^^^^^^^^^^^
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+src\tasktracker\models.py:63: TypeError
+_____________ test_invalid_filter_is_not_silently_an_empty_result _____________
+
+    def test_invalid_filter_is_not_silently_an_empty_result():
+>       with pytest.raises(ValueError, match="Status"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\test_refinements.py:31: Failed
+_____________ test_invalid_text_type_uses_domain_error[changes0] ______________
+
+changes = {'title': None}
+
+    @pytest.mark.parametrize("changes", [{"title": None}, {"description": None}])
+    def test_invalid_text_type_uses_domain_error(changes):
+        values = {"title": "Válida", **changes}
+        with pytest.raises(ValueError):
+>           TaskService().create(**values)
+
+tests\test_refinements.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\tasktracker\service.py:23: in create
+    task = Task(
+<string>:11: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Task(title=None, description='', priority=<Priority.MEDIUM: 'media'>, due_date=None, due_time=None, status=<Status.PEN...-4e18-8ac0-4d2ae926d392', created_at=datetime.datetime(2026, 10, 23, 12, 45, 55, 878323, tzinfo=datetime.timezone.utc))
+
+    def __post_init__(self) -> None:
+>       self.title = self.title.strip()
+                     ^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'strip'
+
+src\tasktracker\models.py:37: AttributeError
+_____________ test_invalid_text_type_uses_domain_error[changes1] ______________
+
+changes = {'description': None}
+
+    @pytest.mark.parametrize("changes", [{"title": None}, {"description": None}])
+    def test_invalid_text_type_uses_domain_error(changes):
+        values = {"title": "Válida", **changes}
+        with pytest.raises(ValueError):
+>           TaskService().create(**values)
+
+tests\test_refinements.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\tasktracker\service.py:23: in create
+    task = Task(
+<string>:11: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Task(title='Válida', description=None, priority=<Priority.MEDIUM: 'media'>, due_date=None, due_time=None, status=<Stat...-4d35-9f09-d53d1da5bc04', created_at=datetime.datetime(2026, 10, 23, 12, 45, 55, 904125, tzinfo=datetime.timezone.utc))
+
+    def __post_init__(self) -> None:
+        self.title = self.title.strip()
+>       self.description = self.description.strip()
+                           ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'strip'
+
+src\tasktracker\models.py:38: AttributeError
+_______________ test_invalid_update_does_not_change_stored_task _______________
+
+    def test_invalid_update_does_not_change_stored_task():
+        service = TaskService()
+        task = service.create("Original", due_date=date(2026, 10, 23), due_time=time(10))
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\test_refinements.py:65: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_refinements.py::test_datetime_is_not_a_calendar_due_date - ...
+FAILED tests/test_refinements.py::test_time_without_date_is_rejected - Failed...
+FAILED tests/test_refinements.py::test_aware_deadline_time_is_rejected - Fail...
+FAILED tests/test_refinements.py::test_aware_reference_has_explicit_validation
+FAILED tests/test_refinements.py::test_invalid_filter_is_not_silently_an_empty_result
+FAILED tests/test_refinements.py::test_invalid_text_type_uses_domain_error[changes0]
+FAILED tests/test_refinements.py::test_invalid_text_type_uses_domain_error[changes1]
+FAILED tests/test_refinements.py::test_invalid_update_does_not_change_stored_task
+8 failed, 5 passed in 1.36s

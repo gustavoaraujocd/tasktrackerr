@@ -1,12 +1,11 @@
 """Interface de linha de comando do TaskTracker.
 
-Fase 2 — Bootcamp II: aplicação das regras de negócio em Python,
-com menu contínuo para cadastro, visualização e alerta de tarefas atrasadas.
+Bootcamp III: casos de uso do domínio acessíveis em menu contínuo.
 """
 
 from datetime import datetime
 
-from tasktracker import Priority, TaskService
+from tasktracker import Priority, Status, TaskService
 
 
 PRIORITY_OPTIONS = {
@@ -87,7 +86,7 @@ def create_task(service: TaskService) -> None:
     description = input("Descrição: ").strip()
     priority = read_priority()
     due_date = read_due_date()
-    due_time = read_due_time()
+    due_time = read_due_time() if due_date is not None else None
 
     task = service.create(
         title=title,
@@ -104,7 +103,12 @@ def create_task(service: TaskService) -> None:
 def list_tasks(service: TaskService) -> None:
     """Exibe todas as tarefas cadastradas de forma organizada."""
     print("\n=== TAREFAS CADASTRADAS ===")
-    tasks = service.list()
+    display_tasks(service.list())
+    show_overdue_notifications(service)
+
+
+def display_tasks(tasks) -> None:
+    """Apresenta uma coleção de tarefas, inclusive consultas filtradas."""
 
     if not tasks:
         print("Nenhuma tarefa cadastrada no momento.")
@@ -120,7 +124,67 @@ def list_tasks(service: TaskService) -> None:
         print(f"Prazo:       {format_due_date(task)}")
         print(f"Status:      {task.status.value.replace('_', ' ').capitalize()}")
 
-    show_overdue_notifications(service)
+
+
+def consult_task(service: TaskService) -> None:
+    task_id = read_required_text("ID da tarefa: ")
+    display_tasks([service.get(task_id)])
+
+
+def complete_task(service: TaskService) -> None:
+    task_id = read_required_text("ID da tarefa: ")
+    service.complete(task_id)
+    print("[SUCESSO] Tarefa concluída.")
+
+
+def read_status() -> Status:
+    while True:
+        value = input("Status (pendente/em_andamento/concluida): ").strip().lower()
+        try:
+            return Status(value)
+        except ValueError:
+            print("[ERRO] Status inválido.")
+
+
+def filter_tasks(service: TaskService) -> None:
+    display_tasks(service.list(read_status()))
+
+
+def update_task(service: TaskService) -> None:
+    task_id = read_required_text("ID da tarefa: ")
+    service.get(task_id)
+    print("Enter mantém o valor. '-' limpa descrição, data ou hora.")
+    changes = {}
+    for label, field in [("Título", "title"), ("Descrição", "description")]:
+        value = input(f"{label}: ").strip()
+        if value:
+            changes[field] = "" if value == "-" and field == "description" else value
+    value = input("Prioridade (Alta/Média/Baixa): ").strip().lower()
+    if value:
+        if value not in PRIORITY_OPTIONS:
+            raise ValueError("Prioridade inválida. Nenhuma alteração aplicada.")
+        changes["priority"] = PRIORITY_OPTIONS[value]
+    for label, field, fmt, converter in [
+        ("Data (DD/MM/AAAA)", "due_date", "%d/%m/%Y", datetime.date),
+        ("Hora (HH:MM)", "due_time", "%H:%M", datetime.time),
+    ]:
+        value = input(f"{label}: ").strip()
+        if value:
+            if value == "-":
+                changes[field] = None
+            else:
+                try:
+                    changes[field] = converter(datetime.strptime(value, fmt))
+                except ValueError:
+                    raise ValueError(f"{label} inválida. Nenhuma alteração aplicada.") from None
+    value = input("Status (pendente/em_andamento/concluida): ").strip().lower()
+    if value:
+        try:
+            changes["status"] = Status(value)
+        except ValueError:
+            raise ValueError("Status inválido. Nenhuma alteração aplicada.") from None
+    service.update(task_id, **changes)
+    print("[SUCESSO] Tarefa atualizada.")
 
 
 def show_menu() -> None:
@@ -131,6 +195,10 @@ def show_menu() -> None:
     print("1. Cadastrar nova tarefa")
     print("2. Visualizar tarefas cadastradas")
     print("3. Sair da aplicação")
+    print("4. Consultar tarefa por ID")
+    print("5. Atualizar tarefa")
+    print("6. Concluir tarefa")
+    print("7. Filtrar tarefas por status")
     print("=" * 50)
 
 
@@ -143,17 +211,27 @@ def main() -> None:
     while True:
         show_menu()
         show_overdue_notifications(service)
-        option = input("Escolha uma opção: ").strip()
-
-        if option == "1":
-            create_task(service)
-        elif option == "2":
-            list_tasks(service)
-        elif option == "3":
-            print("\nAté logo! Encerrando o TaskTracker.")
+        try:
+            option = input("Escolha uma opção: ").strip()
+            if option == "3":
+                print("\nAté logo! Encerrando o TaskTracker.")
+                break
+            actions = {
+                "1": create_task, "2": list_tasks, "4": consult_task,
+                "5": update_task, "6": complete_task, "7": filter_tasks,
+            }
+            action = actions.get(option)
+            if action is None:
+                print("[ERRO] Opção inválida. Escolha uma opção de 1 a 7.")
+            else:
+                action(service)
+        except KeyError:
+            print("[ERRO] Tarefa não encontrada. Copie o ID completo da listagem.")
+        except ValueError as exc:
+            print(f"[ERRO] {exc}")
+        except (EOFError, KeyboardInterrupt):
+            print("\nEntrada encerrada. Encerrando o TaskTracker.")
             break
-        else:
-            print("[ERRO] Opção inválida. Escolha 1, 2 ou 3.")
 
 
 if __name__ == "__main__":
