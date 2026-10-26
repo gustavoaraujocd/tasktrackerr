@@ -1,0 +1,11 @@
+Trechos dos logs reais do GitHub Actions. Recorte intencional; não é log integral.
+Run: 39957156921 | head: 984ed48daad1fd83ca9c0b7727b67e843adf5301
+Checkout executado: merge ref 832c6ecf9f0b546984b58039311707f292ba206d.
+Python — https://github.com/gustavoaraujocd/tasktrackerr/actions/runs/39957156921/job/120425735622
+2026-10-23T12:56:33.6120961Z HEAD is now at 832c6ec Merge 984ed48daad1fd83ca9c0b7727b67e843adf5301 into 0e412f94bdd52f3383bf0fbd6f77a728682ea11b
+2026-10-23T12:56:33.8058724Z Successfully set up CPython (3.11.17)
+2026-10-23T12:56:39.0514490Z 39 passed in 0.20s
+Docker — https://github.com/gustavoaraujocd/tasktrackerr/actions/runs/39957156921/job/120425735226
+2026-10-23T12:56:34.0091099Z HEAD is now at 832c6ec Merge 984ed48daad1fd83ca9c0b7727b67e843adf5301 into 0e412f94bdd52f3383bf0fbd6f77a728682ea11b
+2026-10-23T12:56:39.0408365Z ##[group]Run test "$(docker run --rm --entrypoint id tasktracker:phase3 -u)" = "10001"
+2026-10-23T12:56:48.2216383Z 39 passed in 0.50s

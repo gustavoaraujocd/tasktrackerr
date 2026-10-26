@@ -12,3 +12,5 @@ RUN pip install --no-cache-dir ".[dev]"
 CMD ["pytest", "-q"]
 
 FROM base AS runtime
+RUN useradd --create-home --uid 10001 app
+USER 10001:10001
