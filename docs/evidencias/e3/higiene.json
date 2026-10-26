@@ -1,0 +1,5 @@
+{
+  "scope": "arquivos textuais do snapshot; padrões de chave privada, token GitHub e access key AWS; sem análise do histórico inteiro",
+  "matches": [],
+  "not_a_comprehensive_secret_audit": true
+}

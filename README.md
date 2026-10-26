@@ -1,8 +1,8 @@
-# TaskTracker - Bootcamp III / Entrega 2
+# TaskTracker - Entrega 3 / candidata a release
 
 Gerenciador de tarefas em Python, com CLI, domínio isolado, testes automatizados e execução em Docker. O projeto evolui a Entrega 1 e reutiliza a base desenvolvida no Bootcamp II.
 
-**Estado da Entrega 2:** versão publicada na branch `feature/bootcamp3-entrega2`, em [revisão no PR #16](https://github.com/gustavoaraujocd/tasktrackerr/pull/16). A integração depende de revisão humana independente. As aprovações históricas não substituem o aceite deste diff.
+**Estado em 26/10/2026:** candidata `1.0.0rc1` preparada em `feature/entrega3-final`, ainda sem homologação humana e sem release estável. O [PR #16](https://github.com/gustavoaraujocd/tasktrackerr/pull/16) foi integrado em develop. O [PR #17](https://github.com/gustavoaraujocd/tasktrackerr/pull/17) permanece aberto para main, sem aprovação humana. A tag `v1.0.0` será criada somente após integração permitida pelas proteções e validação do commit final.
 
 ## Equipe
 
@@ -27,9 +27,11 @@ Python 3.11+ e Git. No Windows use `python`; Linux/macOS podem usar `python3`.
 ```bash
 git clone https://github.com/gustavoaraujocd/tasktrackerr.git
 cd tasktrackerr
-git switch feature/bootcamp3-entrega2
+git switch main
 python -m venv .venv
 ```
+
+Os comandos acima selecionam a branch de distribuição. Enquanto a integração da Entrega 3 estiver pendente, para avaliar esta candidata execute `git switch feature/entrega3-final` antes de instalar. O ZIP da Entrega 3 já contém a candidata e dispensa clone/switch. Não execute `git switch v1.0.0` antes da publicação real da tag.
 
 Ative o ambiente:
 
@@ -80,13 +82,13 @@ O Compose habilita stdin e TTY. Sem serviço web, portas ou bind mounts de códi
 ## Testes reproduzíveis
 
 ```bash
-python -m pytest -q --junitxml=test-results.xml
-docker compose build tests
-docker compose run --rm tests
+python -m pytest -q --cov --cov-report=term-missing --cov-report=xml --cov-report=html --junitxml=test-results.xml
+docker compose run --build --rm -T tests
+docker compose run --build --rm -T coverage
 ```
 
-A revisão desta entrega registra **39 aprovados, 0 falhas e 0 ignorados**. Isso representa 100% de passagem dos testes coletados; não equivale a cobertura de 100% do código ou ausência de defeitos.
-O workflow `.github/workflows/tests.yml` executa Python 3.11 e Docker no GitHub Actions e publica o JUnit como artefato.
+A execução local da Entrega 3 e as métricas exatas estão em [relatório E3](docs/relatorio-testes-e3.md), com JUnit, XML de coverage e log em `docs/evidencias/e3/`. Todos os testes coletados precisam passar. Passagem de 100% da suíte não significa cobertura de 100% ou ausência de defeitos. O limite automatizado de cobertura combinada (linhas e ramos) é 90%.
+O workflow mantém os checks `test` e `docker` e publica JUnit, XML e HTML da cobertura. O serviço `coverage` grava resultados em `reports/` no host; o teste simples não exige volume.
 
 - [Relatório de testes](docs/relatorio-testes-e2.md).
 - [Falhas antes da correção](docs/evidencias/antes.log).
@@ -132,7 +134,9 @@ O Codespaces é opcional, consome cota e não é requisito para execução; seu 
 
 Fluxo: `feature/* -> PR -> develop -> PR -> main`.
 Antes de cada merge: CI aprovado no SHA atual, evidências conferidas, revisão humana independente e comentários resolvidos. O autor não substitui a aprovação de um colega.
-A proteção de main e develop está ativa no [ruleset 25727805](https://github.com/gustavoaraujocd/tasktrackerr/rules/25727805): PR, uma aprovação independente, checks test/docker, base atualizada, resolução de conversas e aprovação do último push. Sem bypass; force push e exclusão bloqueados. O [milestone da Sprint 2](https://github.com/gustavoaraujocd/tasktrackerr/milestone/1) reúne #14/#15 e PR #16 e segue aberto até o aceite. Convites a estherbastos, JON4TH4NRSC e cauamrad estão pendentes; convite não equivale a revisão.
+A proteção de main e develop foi confirmada no [ruleset 25727805](https://github.com/gustavoaraujocd/tasktrackerr/rules/25727805): PR, uma aprovação independente, checks test/docker, base atualizada, resolução de conversas e aprovação do último push. Sem bypass; force push e exclusão bloqueados. As aprovações do PR #16 não aprovam o PR #17 ou a Entrega 3. Pedidos a Esther/Cauã falharam anteriormente por falta de colaboradores habilitados, conforme relato do responsável; não foram repetidos nem considerados aprovações.
+
+Documentação atual: [SDD As-Built](docs/sdd-as-built.md), [testes e coverage](docs/relatorio-testes-e3.md), [retrospectiva](docs/retrospectiva-e3.md), [roteiro de vídeo](docs/roteiro-video-e3.md), [release e bloqueios](docs/release-e3.md). Os documentos E1/E2 abaixo são históricos e seus números não representam esta candidata. Vídeo final: não fornecido/não gravado nesta execução. Nenhum link fictício foi incluído.
 
 - [PR #4: revisão histórica da Entrega 1](https://github.com/gustavoaraujocd/tasktrackerr/pull/4).
 - [PR #6: integração histórica](https://github.com/gustavoaraujocd/tasktrackerr/pull/6).

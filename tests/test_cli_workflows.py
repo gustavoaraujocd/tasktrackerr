@@ -88,3 +88,23 @@ def test_removing_only_date_is_rejected_in_menu(monkeypatch, capsys):
     run_menu(monkeypatch, service, ["5", task.id, "Outra", "", "", "-", "", "", "3"])
     assert service.get(task.id).title == "Original"
     assert "exige uma data" in capsys.readouterr().out
+
+
+def test_empty_filter_does_not_claim_tracker_is_empty(monkeypatch, capsys):
+    service = TaskService()
+    service.create("Continua pendente")
+    run_menu(monkeypatch, service, ["7", "concluida", "3"])
+    output = capsys.readouterr().out
+    assert "Nenhuma tarefa encontrada para este status" in output
+    assert "Nenhuma tarefa cadastrada" not in output
+    assert len(service.list()) == 1
+
+
+def test_overdue_listing_has_one_alert_per_menu_cycle(monkeypatch, capsys):
+    service = TaskService()
+    service.create("Vencida", due_date=date(2000, 1, 1))
+    run_menu(monkeypatch, service, ["2", "3"])
+    output = capsys.readouterr().out
+    assert output.count("[ALERTA]") == 2
+    listing = output.split("=== TAREFAS CADASTRADAS ===", 1)[1].split("TASKTRACKER", 1)[0]
+    assert "[ALERTA]" not in listing

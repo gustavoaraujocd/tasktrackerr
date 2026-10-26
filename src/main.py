@@ -104,14 +104,13 @@ def list_tasks(service: TaskService) -> None:
     """Exibe todas as tarefas cadastradas de forma organizada."""
     print("\n=== TAREFAS CADASTRADAS ===")
     display_tasks(service.list())
-    show_overdue_notifications(service)
 
 
-def display_tasks(tasks) -> None:
+def display_tasks(tasks, empty_message="Nenhuma tarefa cadastrada no momento.") -> None:
     """Apresenta uma coleção de tarefas, inclusive consultas filtradas."""
 
     if not tasks:
-        print("Nenhuma tarefa cadastrada no momento.")
+        print(empty_message)
         return
 
     for index, task in enumerate(tasks, start=1):
@@ -147,7 +146,7 @@ def read_status() -> Status:
 
 
 def filter_tasks(service: TaskService) -> None:
-    display_tasks(service.list(read_status()))
+    display_tasks(service.list(read_status()), "Nenhuma tarefa encontrada para este status.")
 
 
 def update_task(service: TaskService) -> None:

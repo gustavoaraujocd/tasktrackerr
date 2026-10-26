@@ -31,3 +31,14 @@ Thumbs.db
 .env.*
 *.pem
 *.key
+
+.coverage*
+htmlcov/
+coverage.xml
+test-results.xml
+build/
+dist/
+*.egg-info/
+reports/
+!docs/evidencias/e3/*.log
+!docs/evidencias/e3/coverage.xml

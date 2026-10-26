@@ -1,15 +1,3 @@
-# src
-
-Esta pasta receberá a implementação do TaskTracker em Python na próxima fase do Bootcamp.
-
-Estrutura futura sugerida:
-
-```text
-src/
-├── main.py
-├── models/
-├── services/
-└── utils/
-```
-
-Nesta etapa inicial, nenhum código funcional foi adicionado para manter o repositório alinhado ao escopo de planejamento lógico.
+# Código da aplicação
+main.py implementa a interface CLI. tasktracker/models.py contém Task, Priority e Status;
+tasktracker/service.py oferece os casos de uso em memória. Veja docs/sdd-as-built.md.
