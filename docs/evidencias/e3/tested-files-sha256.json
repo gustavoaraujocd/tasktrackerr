@@ -1,0 +1,14 @@
+{
+  ".github/workflows/tests.yml": "d9a6f4738f81d673243d2da5739107d7d5578c8bde115d16f9d77f8f0da8c3a2",
+  "docker-compose.yml": "cfc2b862ee2498bcc030e9d7d051d025e25a4f9b11200c95b17298403743b635",
+  "Dockerfile": "5b941bf1b9c13f807507e002c3ce208c5068d12f956e03aecb291401e706caf0",
+  "pyproject.toml": "b35d3a0519b4c3f93d57caa262fd7c0550ec5724958c924be7cf77ad54473f6e",
+  "src/main.py": "ec7bc7767d52b50f798f5a6310392fcdf48916a61a4f8d57b342897169c3cd54",
+  "src/tasktracker/__init__.py": "6a7f3fee8d9f938b1903f540529a8549d8eaa16ab33f55cf4949c515881d475b",
+  "src/tasktracker/models.py": "6574f0a0f6824a0949f10f4f684050bd0240dd4368419409b499924fd01ef75f",
+  "src/tasktracker/service.py": "f747b94097a58321b0790e2d77e430d674006da78c0e9382505ebf776cde91c8",
+  "tests/test_cli.py": "d26c10447d89062b87789f1d062603d3fe1e1c39cab08cb880f7d1c0e344028a",
+  "tests/test_cli_workflows.py": "daa2432bd0443d13685c6d05aae2872f59fa1f51a3dd0d617b1de6e335d3e861",
+  "tests/test_refinements.py": "f12a3ce716bc3f270c934857991a2e5207dc854f81ee4b60ad5fadba17e60fb7",
+  "tests/test_service.py": "0ef42c24c37021d8afbc50ac984159873cce169f23bbfbdc4eb9958baffe25c2"
+}

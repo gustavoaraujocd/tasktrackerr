@@ -110,3 +110,9 @@ devem aparecer no README e na defesa das decisões.
 | R-E2-05 | E-05 | RN10 define texto e ValueError | test_invalid_text_type_uses_domain_error |
 
 Origem: [ERROS.md](ERROS.md), issue #14 e PR #16. Contratos foram refinados antes da correção, na preparação de 23/10/2026, sem atribuir homologação à equipe. A ordem numérica de seções do StudyRoom é um modelo de organização; os contratos do TaskTracker permanecem neste arquivo.
+
+## Refinamento E3 - revisão do PR #17 (26/10/2026)
+
+- RN17: filtro sem resultados informa ausência de correspondências; não afirma que o cadastro está vazio.
+- RN18: alertas de atraso são apresentados uma vez por ciclo do menu, antes da entrada; a listagem não duplica alertas.
+- A especificação consolidada da candidata à release está em `sdd-as-built.md`.

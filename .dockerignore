@@ -18,3 +18,11 @@ outputs
 .env.*
 *.pem
 *.key
+
+.coverage*
+htmlcov
+coverage.xml
+test-results.xml
+build
+dist
+reports

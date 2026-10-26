@@ -1,0 +1,108 @@
+{
+  "observed_date": "2026-10-26",
+  "ruleset": {
+    "id": 25727805,
+    "name": "Governança Bootcamp III — main e develop",
+    "target": "branch",
+    "source_type": "Repository",
+    "source": "gustavoaraujocd/tasktrackerr",
+    "enforcement": "active",
+    "conditions": {
+      "ref_name": {
+        "exclude": [],
+        "include": [
+          "refs/heads/main",
+          "refs/heads/develop"
+        ]
+      }
+    },
+    "rules": [
+      {
+        "type": "deletion"
+      },
+      {
+        "type": "non_fast_forward"
+      },
+      {
+        "type": "pull_request",
+        "parameters": {
+          "required_approving_review_count": 1,
+          "dismiss_stale_reviews_on_push": true,
+          "required_reviewers": [],
+          "require_code_owner_review": false,
+          "require_last_push_approval": true,
+          "required_review_thread_resolution": true,
+          "require_extra_approval_for_unattributed_changes": true,
+          "allowed_merge_methods": [
+            "merge",
+            "squash",
+            "rebase"
+          ]
+        }
+      },
+      {
+        "type": "required_status_checks",
+        "parameters": {
+          "strict_required_status_checks_policy": true,
+          "do_not_enforce_on_create": false,
+          "required_status_checks": [
+            {
+              "context": "test",
+              "integration_id": 15368
+            },
+            {
+              "context": "docker",
+              "integration_id": 15368
+            }
+          ]
+        }
+      }
+    ],
+    "node_id": "RRS_lACqUmVwb3NpdG9yec5RXgOPzgGIkz0",
+    "created_at": "2026-10-23T11:11:11.936-03:00",
+    "updated_at": "2026-10-23T11:11:12.107-03:00",
+    "bypass_actors": [],
+    "current_user_can_bypass": "never",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/gustavoaraujocd/tasktrackerr/rulesets/25727805"
+      },
+      "html": {
+        "href": "https://github.com/gustavoaraujocd/tasktrackerr/rules/25727805"
+      }
+    }
+  },
+  "base_checks": [
+    {
+      "name": "docker",
+      "head_sha": "b54839dba345e164e2cfcd8473627a9af96e9733",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/gustavoaraujocd/tasktrackerr/actions/runs/40261694716/job/121375251628"
+    },
+    {
+      "name": "test",
+      "head_sha": "b54839dba345e164e2cfcd8473627a9af96e9733",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/gustavoaraujocd/tasktrackerr/actions/runs/40261694716/job/121375251577"
+    },
+    {
+      "name": "docker",
+      "head_sha": "b54839dba345e164e2cfcd8473627a9af96e9733",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/gustavoaraujocd/tasktrackerr/actions/runs/40261674832/job/121375192084"
+    },
+    {
+      "name": "test",
+      "head_sha": "b54839dba345e164e2cfcd8473627a9af96e9733",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/gustavoaraujocd/tasktrackerr/actions/runs/40261674832/job/121375191866"
+    }
+  ],
+  "pr17_human_approvals": 0,
+  "pr17_unresolved_threads": 3,
+  "releases_at_inspection": []
+}

@@ -1,0 +1,18 @@
+.........................................                                [100%]
+- generated xml file: C:\Users\people.gcarmo\Documents\Codex\2026-10-26\referenced-chatgpt-conversation-this-is-an\work\junit.xml -
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.14-final-0 _______________
+
+Name                          Stmts   Miss Branch BrPart  Cover   Missing
+-------------------------------------------------------------------------
+src\main.py                     157      1     42      1    99%   55
+src\tasktracker\__init__.py       3      0      0      0   100%
+src\tasktracker\models.py        51      0     22      0   100%
+src\tasktracker\service.py       34      0      4      0   100%
+-------------------------------------------------------------------------
+TOTAL                           245      1     68      1    99%
+Coverage HTML written to dir ../../work/htmlcov
+Coverage XML written to file ../../work/coverage.xml
+Coverage JSON written to file ../../work/coverage.json
+Required test coverage of 90.0% reached. Total coverage: 99.36%
+41 passed in 18.85s

@@ -13,3 +13,12 @@ services:
       target: tests
     profiles: ["tests"]
     command: ["pytest", "-q"]
+
+  coverage:
+    build:
+      context: .
+      target: tests
+    profiles: ["tests"]
+    command: ["pytest", "-q", "--cov", "--cov-report=term-missing", "--cov-report=xml:/reports/coverage.xml", "--cov-report=html:/reports/htmlcov", "--junitxml=/reports/junit.xml"]
+    volumes:
+      - ./reports:/reports
